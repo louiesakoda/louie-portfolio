@@ -3,22 +3,30 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * Louie's pen doodle portrait (supplied by Louie, 2026-10-30). Large on
- * the homepage, small at the top of a case study.
+ * Louie's photo portrait (supplied by Louie, 2026-11-20; it replaces the
+ * pen doodle). Large on the homepage, small at the top of a case study
+ * and on the standard pages.
  *
- * The file is ink on a transparent ground, so it sits on the paper in
- * every browser. It used to be ink on white with a CSS multiply blend,
- * which iPhone browsers did not apply: the white showed as a box.
+ * A color photo in a rounded square (Louie picked this over a circle and
+ * a black-and-white version). The photo has its own edge, so it sits flush
+ * with the name below it; the doodle needed a negative margin for the
+ * empty space around the drawing.
  */
 function Portrait({ size = "lg", className }: { size?: "lg" | "sm"; className?: string }) {
   return (
-    <div className={cn("portrait", size === "lg" ? "-ml-3 w-[9.75rem]" : "-ml-2 w-24", className)}>
+    <div
+      className={cn(
+        "portrait overflow-hidden rounded-md",
+        size === "lg" ? "w-[9.75rem]" : "w-20",
+        className,
+      )}
+    >
       <Image
-        src="/portrait/louie-doodle.webp"
+        src="/portrait/louie-photo.webp"
         width={640}
         height={640}
-        alt="A pen doodle of Louie: short spiky dark hair, clear glasses, a wide smile with stubble, a bead necklace, and a hooded sweatshirt."
-        sizes={size === "lg" ? "156px" : "96px"}
+        alt="Louie Sakoda, smiling, in clear glasses and a dark sweater."
+        sizes={size === "lg" ? "156px" : "80px"}
         preload={size === "lg"}
       />
     </div>
