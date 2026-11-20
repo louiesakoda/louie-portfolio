@@ -1247,3 +1247,21 @@ Plan 051:
   to done on 2026-10-27 (OFF-1109), and the Slack rollout ran from the first
   PR on 2026-10-05 to launch on 2026-10-28. The copy says "one day once the
   model was in place" because the ticket dates do not show earlier prep work.
+
+## Photo portrait, November 20, 2026
+
+- **Photo replaces the doodle (Louie, 2026-11-20).** Louie supplied a
+  studio headshot. `public/portrait/louie-photo.webp` (640px, about 30KB)
+  replaces `louie-doodle.webp` on the homepage, the case studies, and the
+  standard pages. Louie compared three treatments on the live layout (color
+  rounded square, black-and-white circle, color circle) and picked the
+  color rounded square: `rounded-md` (12px), 156px wide on the homepage,
+  80px elsewhere. The photo has its own edge, so the negative left margin
+  the doodle needed is gone and the photo lines up with the name.
+- **No photo on About (Louie, 2026-11-20).** The whiteboard photo
+  (`louie-working-session.webp`, `profile.heroPhoto`) is gone from the
+  About page, the profile, and `public/`. The portrait in the left column
+  is the only photo on the page.
+- The red pen decision marks still use the handwritten note. They were
+  first drawn to match the doodle; they stand on their own as a markup
+  style on screenshots.

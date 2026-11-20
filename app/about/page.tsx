@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { AboutActions } from "@/components/portfolio/about-actions";
 
 import { Canvas } from "@/components/app-shell/contextual-rail";
@@ -18,10 +17,11 @@ export const metadata: Metadata = {
  *
  * Louie's own wording (supplied 2026-09-30), stored in `profile.about`:
  * who he is, how he works, where he has worked, and what he wants to work
- * on next. The photo is his supplied working-session image.
+ * on next. The page has no photo of its own: the portrait in the left
+ * column is enough (Louie, 2026-11-20).
  */
 export default function AboutPage() {
-  const { about, heroPhoto } = profile;
+  const { about } = profile;
 
   return (
     <Canvas>
@@ -35,18 +35,6 @@ export default function AboutPage() {
         <div className="mt-6 flex max-w-[34rem] flex-col gap-4 text-body-lg text-foreground-muted">
           {about.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
-
-        {heroPhoto ? (
-          <Image
-            src={heroPhoto.src}
-            alt={heroPhoto.alt}
-            width={heroPhoto.width}
-            height={heroPhoto.height}
-            sizes="(min-width: 1024px) 760px, 100vw"
-            className="mt-10 h-auto w-full border border-border-default"
-            loading="eager"
-          />
-        ) : null}
 
         <p className="mt-12 border-t border-foreground pt-5 font-display text-heading-lg text-balance text-foreground">
           {about.belief}
