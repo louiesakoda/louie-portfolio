@@ -1265,3 +1265,8 @@ Plan 051:
 - The red pen decision marks still use the handwritten note. They were
   first drawn to match the doodle; they stand on their own as a markup
   style on screenshots.
+- **Small portrait loads at once (2026-11-20).** On the live site the
+  80px portrait on About and the case studies appeared 2 to 5 seconds
+  after the page: it used the default lazy loading, which is for images
+  further down a page. It now uses `loading="eager"`. The homepage
+  portrait keeps `preload`.
