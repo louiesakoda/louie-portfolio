@@ -27,7 +27,10 @@ function Portrait({ size = "lg", className }: { size?: "lg" | "sm"; className?: 
         height={640}
         alt="Louie Sakoda, smiling, in clear glasses and a dark sweater."
         sizes={size === "lg" ? "156px" : "80px"}
-        preload={size === "lg"}
+        // Both sizes sit at the top of the page, so neither loads lazily.
+        // The large one is the homepage's largest image: preload it. The
+        // small one only needs to start at once (Next allows one or the other).
+        {...(size === "lg" ? { preload: true } : { loading: "eager" as const })}
       />
     </div>
   );
