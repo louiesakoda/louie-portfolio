@@ -5,7 +5,7 @@ Refreshed September 19, 2026 against the implementation, replacing the stale Pla
 ## Implemented
 
 - [x] Supplied resume, PDF, contact links, availability, and San Francisco location.
-- [x] Supplied portrait at `public/images/louie.jpg` and generated Open Graph route at `app/opengraph-image.tsx`.
+- [x] Supplied portrait at `public/portrait/louie-photo.webp` (avatar crop `louie-avatar.webp`, 2026-11-20) and generated Open Graph route at `app/opengraph-image.tsx`.
 - [x] Analytics and Offboard featured sequence, shorter positioning, simplified left rail, on-demand Ask Louie.
 - [x] Separate analytics article with two real demo images and attributed evaluations.
 - [x] Consolidated Offboard/Job Packets article with precise automation boundary and unmeasured plan-first correction.

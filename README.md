@@ -1270,3 +1270,9 @@ Plan 051:
   after the page: it used the default lazy loading, which is for images
   further down a page. It now uses `loading="eager"`. The homepage
   portrait keeps `preload`.
+- **Chat avatar and favicon use the photo (Louie, 2026-11-20).** Ask
+  Louie's avatar and the browser icons (`app/icon.jpg` 512px,
+  `app/apple-icon.jpg` 180px) now use the new photo. They use a square
+  crop around the face (`public/portrait/louie-avatar.webp`, 256px),
+  because the full portrait leaves the face too small in a 16px tab icon
+  or a 32px circle. The older headshot `public/images/louie.jpg` is gone.
