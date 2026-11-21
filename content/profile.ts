@@ -159,12 +159,13 @@ export const profile = {
   location: "San Francisco, CA" as string | null,
 
   /**
-   * Square portrait under /public, supplied by Louie 2026-08-31 and cropped
-   * square around the face from `louie-natural-headshot.jpeg` (640×640 — 2x
-   * the largest place it renders, the 56px `lg` avatar). Drives both the left
-   * rail's logo and AI Louie's chat avatar.
+   * Square face crop of Louie's photo portrait (supplied 2026-11-20, the
+   * same photo as `public/portrait/louie-photo.webp`), 256×256: 2x the
+   * largest place it renders, the 56px `lg` avatar. The tighter crop keeps
+   * the face readable in a 32px circle. Drives AI Louie's chat avatar.
+   * `app/icon.jpg` and `app/apple-icon.jpg` use the same crop.
    */
-  avatar: "/images/louie.jpg" as string | null,
+  avatar: "/portrait/louie-avatar.webp" as string | null,
 } as const;
 
 export type Profile = typeof profile;
