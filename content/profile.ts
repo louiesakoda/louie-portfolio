@@ -142,8 +142,8 @@ export const profile = {
   links: {
     // Supplied by Louie, 2026-08-22.
     linkedin: "https://www.linkedin.com/in/louiesakoda" as string | null,
-    // Supplied by Louie, 2026-11-22.
-    github: "https://github.com/trulou1028" as string | null,
+    // Supplied by Louie, 2026-11-22; handle renamed to louiesakoda, 2026-11-23.
+    github: "https://github.com/louiesakoda" as string | null,
     email: "louie.sakoda@gmail.com" as string | null,
     /** Scheduling link — the availability indicator points here. */
     calendly: "https://calendly.com/louiesakoda/louie-portfolio" as string | null,
