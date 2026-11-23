@@ -34,9 +34,10 @@ export type AnswerLink =
 
 /** Louie's own links — the only external destinations an answer may link to. */
 function allowedExternalHrefs(): string[] {
-  const { linkedin, calendly, email } = profile.links;
+  const { linkedin, github, calendly, email } = profile.links;
   return [
     linkedin,
+    github,
     calendly,
     email ? `mailto:${email}` : null,
   ].filter((value): value is string => Boolean(value));

@@ -24,7 +24,7 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
 }
 
 export function PersonSchema() {
-  const sameAs = [profile.links.linkedin].filter(Boolean);
+  const sameAs = [profile.links.linkedin, profile.links.github].filter(Boolean);
 
   return (
     <JsonLd

@@ -17,6 +17,7 @@ export function AboutActions() {
     { title: "Get in touch", items: [
       ...(links.email ? [{ label: "Email", href: `mailto:${links.email}` }] : []),
       ...(links.linkedin ? [{ label: "LinkedIn", href: links.linkedin }] : []),
+      ...(links.github ? [{ label: "GitHub", href: links.github }] : []),
       ...(links.calendly ? [{ label: "Book time", href: links.calendly }] : []),
     ] },
   ];

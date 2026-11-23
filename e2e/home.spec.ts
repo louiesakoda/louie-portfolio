@@ -132,7 +132,7 @@ test.describe("navigation", () => {
       // Ask Louie; on a wide screen the "Contact" list is hidden.
       const contact = page.getByRole("navigation", { name: "Contact" });
       const links = [...await nav.getByRole("link").allTextContents(), ...await contact.getByRole("link").allTextContents()];
-      expect(links, path).toEqual(["Work", "About", "Resume", "LinkedIn (opens in a new tab)", "Book a Call (opens in a new tab)"]);
+      expect(links, path).toEqual(["Work", "About", "Resume", "LinkedIn (opens in a new tab)", "GitHub (opens in a new tab)", "Book a Call (opens in a new tab)"]);
     }
     // Scrolled, the menu rolls up into a button that opens it again.
     await page.locator("[data-canvas-scroll]").evaluate((el) => el.scrollTo({ top: 2000, behavior: "instant" }));
@@ -218,8 +218,8 @@ test("Ask Louie lives in navigation and retains a draft across routes", async ({
 test("About has one unified closing action section", async ({ page }) => {
   await page.goto("/about");
   const actions = page.getByRole("region", { name: "Let’s start a conversation." });
-  await expect(actions.getByRole("link")).toHaveCount(5);
-  for (const label of ["View selected work", "Resume", "Email", "LinkedIn", "Book time"]) {
+  await expect(actions.getByRole("link")).toHaveCount(6);
+  for (const label of ["View selected work", "Resume", "Email", "LinkedIn", "GitHub", "Book time"]) {
     await expect(actions.getByRole("link", { name: label, exact: true })).toBeVisible();
   }
 });
