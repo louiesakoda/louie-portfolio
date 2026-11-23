@@ -104,7 +104,7 @@ test("structured data is present and parses", async ({ page }) => {
   // with that source exactly.
   expect(person.address?.addressLocality).toBe("San Francisco");
   expect(person.sameAs).toContain("https://www.linkedin.com/in/louiesakoda");
-  expect(person.sameAs).toContain("https://github.com/trulou1028");
+  expect(person.sameAs).toContain("https://github.com/louiesakoda");
 });
 
 test("case studies expose CreativeWork matching the visible title", async ({
