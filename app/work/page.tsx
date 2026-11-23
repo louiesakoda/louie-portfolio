@@ -18,7 +18,7 @@ export default function WorkIndex() {
   return <Canvas width="wide">
     <MotionReveal>
     <RevealHeading as="h1" className="max-w-[18ch] font-display text-display-lg text-balance text-foreground">Different systems. Decisions people can make.</RevealHeading>
-    <p className="mt-6 max-w-[52ch] text-body-lg text-foreground-muted">A job seeker’s next step, the AI assistant beside it and how it is tested, a teacher’s judgment, and a student’s understanding. Five product stories, then three projects built on my own.</p></MotionReveal>
+    <p className="mt-6 max-w-[52ch] text-body-lg text-foreground-muted">A job seeker’s next step, the AI assistant beside it and how it is tested, a teacher’s judgment, and a student’s understanding. Five product stories, then three other projects.</p></MotionReveal>
     <section className="mt-16 flex flex-col gap-24 sm:mt-24 sm:gap-28" aria-label="Product case studies">
       {workProjects.map((project, index) => (
         <WorkRow
@@ -33,7 +33,7 @@ export default function WorkIndex() {
       ))}
     </section>
     <section className="mt-28 sm:mt-36" aria-labelledby="explorations-heading">
-      <MotionReveal><RevealHeading id="explorations-heading" className="font-display text-heading-xl text-foreground">Built on my own</RevealHeading>
+      <MotionReveal><RevealHeading id="explorations-heading" className="font-display text-heading-xl text-foreground">Other projects</RevealHeading>
       <p className="mt-3 text-body text-foreground-muted">Each one says how far it got.</p></MotionReveal>
       <div className="mt-8 grid gap-x-8 gap-y-12 @4xl/canvas:grid-cols-3">
         {experiments.filter((e) => e.status === "prototype").map((experiment) => (

@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       <section data-testid="independent-work" aria-labelledby="own-label" className="mt-24">
-        <h2 id="own-label" className={sectionTitle}>Built on my own</h2>
+        <h2 id="own-label" className={sectionTitle}>Other projects</h2>
         {own.map((row) => <ProjectRow key={row.id} row={row} />)}
       </section>
 

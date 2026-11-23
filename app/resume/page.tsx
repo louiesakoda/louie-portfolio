@@ -51,6 +51,9 @@ export default function ResumePage() {
           {profile.links.linkedin ? (
             <InlineLink href={profile.links.linkedin}>LinkedIn</InlineLink>
           ) : null}
+          {profile.links.github ? (
+            <InlineLink href={profile.links.github}>GitHub</InlineLink>
+          ) : null}
         </div>
 
         {resume.pdfPath ? (

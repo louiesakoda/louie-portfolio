@@ -3,30 +3,42 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { FileText, Menu, X } from "lucide-react";
 
 import { useReducedMotionSafe } from "@/components/portfolio/lumo/use-play";
+import { CalendlyIcon, GitHubIcon, LinkedInIcon } from "@/components/system/brand-icons";
 import { profile } from "@/content/profile";
 import { cn } from "@/lib/utils";
 
 // `py-0.5` lifts each link to a 24px tap target (WCAG 2.2, 2.5.8).
 const link = "focus-ring inline-block rounded-xs py-0.5 transition-colors duration-(--duration-fast) hover:text-accent-hover";
 const current = "text-foreground underline decoration-accent-line underline-offset-[0.25em]";
+/** A link with a small mark before its label (Louie, 2026-11-22). The mark
+ *  takes the text color, so it stays black and white and greys on hover. */
+const withIcon = "inline-flex items-center gap-1.5";
+const icon = "size-3.5 shrink-0";
 
 /** The scroll, in px, over which the menu rolls up, and where it starts. */
 const ROLL_START = 24;
 const ROLL_DISTANCE = 220;
 
-/** LinkedIn and Book a Call, each as a list item. The email address is on
- *  the résumé (Louie, 2026-10-30: it felt out of place in the menu). */
+/** LinkedIn, GitHub, and Book a Call, each as a list item. The email
+ *  address is on the résumé (Louie, 2026-10-30: it felt out of place in the
+ *  menu). */
 function contactItems(itemClassName?: string) {
+  const contacts = [
+    { href: profile.links.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
+    { href: profile.links.github, label: "GitHub", Icon: GitHubIcon },
+    { href: profile.links.calendly, label: "Book a Call", Icon: CalendlyIcon },
+  ];
   return <>
-    {profile.links.linkedin ? (
-      <li className={itemClassName}><a href={profile.links.linkedin} target="_blank" rel="noreferrer noopener" className={link}>LinkedIn<span className="sr-only"> (opens in a new tab)</span></a></li>
-    ) : null}
-    {profile.links.calendly ? (
-      <li className={itemClassName}><a href={profile.links.calendly} target="_blank" rel="noreferrer noopener" className={link}>Book a Call<span className="sr-only"> (opens in a new tab)</span></a></li>
-    ) : null}
+    {contacts.map(({ href, label, Icon }) => href ? (
+      <li key={label} className={itemClassName}>
+        <a href={href} target="_blank" rel="noreferrer noopener" className={cn(link, withIcon)}>
+          <Icon className={icon} />{label}<span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </li>
+    ) : null)}
   </>;
 }
 
@@ -104,9 +116,11 @@ function SiteLinks() {
     };
   }, [open, toggle]);
 
-  const page = (href: string, label: string) => (
+  const page = (href: string, label: string, Icon?: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>) => (
     <li>
-      <Link href={href} aria-current={pathname === href ? "page" : undefined} className={cn(link, pathname === href && current)}>{label}</Link>
+      <Link href={href} aria-current={pathname === href ? "page" : undefined} className={cn(link, Icon && withIcon, pathname === href && current)}>
+        {Icon ? <Icon aria-hidden className={icon} /> : null}{label}
+      </Link>
     </li>
   );
   const hidden = rolled && !open;
@@ -124,7 +138,7 @@ function SiteLinks() {
       <ul id="site-menu" inert={hidden} className="flex gap-x-5">
         {page("/", "Work")}
         {page("/about", "About")}
-        {page("/resume", "Resume")}
+        {page("/resume", "Resume", FileText)}
         {contactItems("site-bar-contact")}
       </ul>
       <button

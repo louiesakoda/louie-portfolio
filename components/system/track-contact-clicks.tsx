@@ -24,9 +24,11 @@ function TrackContactClicks() {
         ? "email"
         : href.includes("linkedin.com")
           ? "linkedin"
-          : href.includes("calendly.com")
-            ? "calendly"
-            : null;
+          : href.includes("github.com")
+            ? "github"
+            : href.includes("calendly.com")
+              ? "calendly"
+              : null;
 
       if (method) track("contact_clicked", { method });
     }
