@@ -157,7 +157,8 @@ factual claim must be grounded in the curated evidence index.
 ## Before finishing any milestone
 
 Run `pnpm typecheck && pnpm lint && pnpm test && pnpm build`, check responsive behavior,
-and record any deviation from the spec in `README.md` (spec §39.13–14).
+and record any deviation from the spec in `docs/build-log.md` (spec §39.13–14).
+The README is the repo's front page for visitors: keep it short.
 
 <!-- BEGIN:nextjs-agent-rules -->
 
