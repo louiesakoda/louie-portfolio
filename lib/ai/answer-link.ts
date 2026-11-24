@@ -52,7 +52,7 @@ function allowedExternalHrefs(): string[] {
 const PROJECT_PAGES: readonly { route: string; name: RegExp }[] = [
   { route: "/work/offboard", name: /\boffboard\b(?!\s+lumo)/i },
   { route: "/work/lumo", name: /\blumo\b(?!\s+(bench|sentry))/i },
-  { route: "/work/lumo-evals", name: /\blumo\s+bench\b/i },
+  { route: "/work/lumo-bench", name: /\blumo\s+bench\b/i },
   { route: "/work/lumo-sentry", name: /\blumo\s+sentry\b/i },
   { route: "/work/ck12-analytics", name: /\b(foresights|insights)\b/i },
   { route: "/work/flexi", name: /\bflexi\b/i },

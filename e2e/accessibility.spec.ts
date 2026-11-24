@@ -20,7 +20,7 @@ const ROUTES = [
   "/experiments/transfersight",
   "/work/offboard",
   "/work/lumo",
-  "/work/lumo-evals",
+  "/work/lumo-bench",
   "/work/lumo-sentry",
   "/work/flexi",
   "/ai-systems",

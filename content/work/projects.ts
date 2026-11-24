@@ -4,7 +4,7 @@ import type { CaseStudyBriefContent } from "@/components/portfolio/case-study-br
 
 /** Canonical editorial metadata. Claims and assets: plans/portfolio-strategy/. */
 export type WorkProject = {
-  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-evals" | "lumo-sentry" | "flexi";
+  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-bench" | "lumo-sentry" | "flexi";
   name: string;
   /** The name in the homepage list, when it differs from `name`. */
   shortName?: string;
@@ -27,8 +27,12 @@ export type WorkProject = {
   imageFrame?: "browser" | "none";
   /** A looping MP4 of the hero screen; `image` is its poster frame. */
   video?: string;
-  /** The product's own icon, beside the case-study title and the brand line. */
+  /** The product's own icon. The family strip shows it at 40px; under 40px
+   *  a sub-brand's badge is too small to read (Plan 052). */
   icon?: { src: string; width: number; height: number };
+  /** A product family: each member's case study links to the others in a
+   *  strip, in array order (Plan 052). A new LUMO sub-brand is one entry. */
+  family?: "lumo";
   role: string;
   scope: string;
   status: string;
@@ -78,6 +82,7 @@ export const workProjects: readonly WorkProject[] = [
   },
   {
     slug: "lumo",
+    family: "lumo",
     name: "Offboard LUMO",
     shortName: "LUMO",
     blurb: "LUMO is the assistant inside Offboard. It reads the person’s own search, sits beside the page they are on, and turns every change into a card they confirm. I designed and built the conversation, the tools, and the rules for when it may act.",
@@ -111,15 +116,16 @@ export const workProjects: readonly WorkProject[] = [
     imageMarks: [],
   },
   {
-    slug: "lumo-evals",
+    slug: "lumo-bench",
+    family: "lumo",
     name: "LUMO Bench",
     blurb: "An early product has too little data to train a model, so I built a bench instead: pass-or-fail cases, a harder set from real conversations, and a check on the grader itself. When a cheaper model failed a required safety case, LUMO kept its model.",
     icon: { src: "/work/lumo-bench/face.webp", width: 512, height: 512 },
     title: "LUMO Bench & Evals System",
     tags: ["AI evaluation", "Model selection", "Product judgment"],
-    href: "/work/lumo-evals",
+    href: "/work/lumo-bench",
     summary: "Training a model needs far more conversations than an early product has. So every LUMO change runs through pass-or-fail cases, a harder set from real conversations, and a check on the grader itself.",
-    image: "/work/lumo-evals/bench.webp",
+    image: "/work/lumo-bench/bench.webp",
     imageAlt: "A chart titled Four checks before a LUMO change ships. Release gate: 32 cases, unchanged code, four runs on 2026-09-26, scoring 31, 31, 30, and 32 of 32. Hard set: 31 harder cases, two runs on 2026-10-01, scoring 28 and 26 of 31, against a line at 85%: tune only when the mean is at or below this line. Grader check: 25 verdicts labelled blind on 2026-09-30, 24 of 25 agree with the grader, Cohen's kappa 0.92, and the one disagreement went to Louie. Model swap: the GPT-6 Luna requalification on 2026-09-23 kept the current model, because the candidate cost less per turn but failed a required safety case.",
     imageCaption: "The four checks and their numbers. A chart drawn for this page from the run reports in Offboard’s repository, not a product screen.",
     imageWidth: 2000, imageHeight: 1200,
@@ -147,6 +153,7 @@ export const workProjects: readonly WorkProject[] = [
        ban conditions, limits, intervals and probe results: see the comment
        at the top of content/work/lumo-sentry.mdx. */
     slug: "lumo-sentry",
+    family: "lumo",
     name: "LUMO Sentry",
     blurb: "Two people were Offboard's whole security team, and a script made bot accounts that nobody noticed. I built a sentry: plain rules watch sign-ups, sign-ins and the text LUMO reads, AI reads only what they flag, and it acts alone only on what one click undoes.",
     icon: { src: "/work/lumo-sentry/face.webp", width: 512, height: 512 },
@@ -239,6 +246,12 @@ export const workProjects: readonly WorkProject[] = [
     imageMarks: [{ x: 30.4, y: 32.4, w: 19, h: 43.6, label: "Different ways into an explanation" }],
   },
 ];
+
+/** Every member of a project's family, the project included, in array
+ *  order. Empty when the project has no family. */
+export function projectFamily(project: WorkProject): readonly WorkProject[] {
+  return project.family ? workProjects.filter((p) => p.family === project.family) : [];
+}
 
 export const featuredWork = workProjects.filter((project) => project.featured);
 

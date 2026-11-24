@@ -1,8 +1,10 @@
 # Plan 052: The LUMO family (LUMO, LUMO Bench, LUMO Sentry)
 
 Status: in progress. Done 2026-11-23: icons (step 2), the Sentry page with
-its hero (steps 3 and 4 for Sentry), homepage grouping. Next: the Bench
-rename and sibling strip (step 1), Bench updates (step 5). Louie's answers in this file are
+its hero (steps 3 and 4 for Sentry), homepage grouping; merged in PR 20 and
+live at louiesakoda.com/work/lumo-sentry. Done 2026-11-23: the Bench
+move to /work/lumo-bench with a redirect, and the family strip (step 1).
+Next: Bench updates (step 5). Louie's answers in this file are
 from the session of 2026-11-23.
 
 ## Goal

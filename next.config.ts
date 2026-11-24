@@ -63,6 +63,16 @@ const nextConfig: NextConfig = {
     unoptimized: process.env.PORTFOLIO_E2E === "1",
   },
 
+  // LUMO Bench moved from /work/lumo-evals (Plan 052, 2026-11-23). The old
+  // page and its images keep working for links already shared. A fragment
+  // (#decision-models) stays on the URL through the redirect.
+  async redirects() {
+    return [
+      { source: "/work/lumo-evals", destination: "/work/lumo-bench", permanent: true },
+      { source: "/work/lumo-evals/:path*", destination: "/work/lumo-bench/:path*", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       {

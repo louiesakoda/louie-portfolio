@@ -21,7 +21,7 @@ test("sitemap lists every public page and no internal ones", async ({ request })
   "/experiments/transfersight",
   "/work/offboard",
     "/work/lumo",
-    "/work/lumo-evals",
+    "/work/lumo-bench",
     "/work/lumo-sentry",
     "/work/flexi",
     "/ai-systems",
@@ -61,7 +61,7 @@ test("every page has a distinct title and description", async ({ page }) => {
   "/experiments/transfersight",
   "/work/offboard",
     "/work/lumo",
-    "/work/lumo-evals",
+    "/work/lumo-bench",
     "/work/lumo-sentry",
     "/work/flexi",
     "/ai-systems",
@@ -139,7 +139,7 @@ test("OpenGraph metadata is present", async ({ page }) => {
 });
 
 const PUBLIC_PATHS = [
-  "/", "/work", "/work/ck12-analytics", "/experiments/neuron-shift", "/experiments/motif", "/experiments/transfersight", "/work/offboard", "/work/lumo", "/work/lumo-evals", "/work/lumo-sentry", "/work/flexi", "/ai-systems",
+  "/", "/work", "/work/ck12-analytics", "/experiments/neuron-shift", "/experiments/motif", "/experiments/transfersight", "/work/offboard", "/work/lumo", "/work/lumo-bench", "/work/lumo-sentry", "/work/flexi", "/ai-systems",
   "/experiments", "/writing", "/about", "/resume",
 ];
 

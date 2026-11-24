@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import Content from "@/content/work/lumo-evals.mdx";
+import Content from "@/content/work/lumo-bench.mdx";
 import { WorkCaseStudy } from "@/components/stacked/work-case-study";
 import { workProjects } from "@/content/work/projects";
-import { LUMO_EVALS_ANCHORS } from "@/lib/routes";
+import { LUMO_BENCH_ANCHORS } from "@/lib/routes";
 
-const project = workProjects.find((p) => p.slug === "lumo-evals")!;
+const project = workProjects.find((p) => p.slug === "lumo-bench")!;
 
 export const metadata: Metadata = {
   title: project.title,
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   alternates: { canonical: project.href },
 };
 
-export default function LumoEvalsCaseStudy() {
+export default function LumoBenchCaseStudy() {
   return (
-    <WorkCaseStudy project={project} anchors={LUMO_EVALS_ANCHORS}>
+    <WorkCaseStudy project={project} anchors={LUMO_BENCH_ANCHORS}>
       <Content />
     </WorkCaseStudy>
   );

@@ -1,6 +1,7 @@
 import { CaseStudyLayout } from "@/components/stacked/case-study-layout";
 import { ArtifactFrame } from "@/components/portfolio/artifact-frame";
 import { CaseStudyBrief } from "@/components/portfolio/case-study-brief";
+import { FamilyStrip } from "@/components/portfolio/family-strip";
 import { NextCaseStudy } from "@/components/portfolio/next-case-study";
 import { CreativeWorkSchema } from "@/components/system/structured-data";
 import { TrackView } from "@/components/system/track-view";
@@ -25,6 +26,7 @@ function WorkCaseStudy({ project, anchors, children }: {
       facts={[...project.facts, { label: "Status", value: project.status }]}
       anchors={anchors}
       header={<>
+        <FamilyStrip project={project} className="mt-10" />
         {project.image ? (
           <ArtifactFrame src={project.image} alt={project.imageAlt} width={project.imageWidth} height={project.imageHeight} caption={project.imageCaption} marks={project.imageMarks} frame={project.imageFrame} video={project.video} eager className="mt-14" />
         ) : null}

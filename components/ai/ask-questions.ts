@@ -51,7 +51,7 @@ export const PAGE_QUESTIONS: readonly PageQuestions[] = [
     ],
   },
   {
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     name: "LUMO Bench & Evals System",
     questions: [
       { text: "Why test LUMO instead of training a model?", slug: "lumo-bench-training" },

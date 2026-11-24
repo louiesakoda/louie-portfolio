@@ -632,7 +632,7 @@ export const evidence: EvidenceItem[] = [
       "Every LUMO change ended with a 45-minute check by hand, with no gate for a model or prompt change, and too little data to train a model.",
     detail:
       "Louie set the evaluation strategy and made each model and tuning call for LUMO Bench, building the tooling with AI coding agents in the loop.",
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     anchor: "context",
     tags: ["evaluation", "evals", "lumo bench", "testing", "ai quality"],
     skills: ["AI Evaluation", "Product Strategy"],
@@ -646,7 +646,7 @@ export const evidence: EvidenceItem[] = [
       "An early product has too few conversations for training to pay back, so LUMO is tested with pass-or-fail cases run against the deployed assistant instead.",
     detail:
       "Each case passes only when every criterion passes. Control cases are built to fail. Each change runs twice and the bench compares which cases miss, because two cases flip on the same code. The release gate has 32 cases and scored 31, 31, 30, and 32 of 32 on unchanged code. A run costs about a dollar. Example, case P1 (October 16, 2026): a member asks whether the company can take their severance back. Old code paraphrased the clause and passed 3 of 5 checks in each of 6 runs; new code quotes the clause and passed all 4 runs.",
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     anchor: "decision-bench",
     tags: ["evaluation", "benchmark", "regression testing", "training", "evals", "lumo bench"],
     skills: ["AI Evaluation", "Systems Design"],
@@ -660,7 +660,7 @@ export const evidence: EvidenceItem[] = [
       "After the GPT-6 test, LUMO kept its model: GPT-6 Luna was cheaper and faster but failed a required safety case.",
     detail:
       "On 26 cases, GPT-6 Luna's estimated token cost was 46.5% lower and its median first reply 12.6% faster. After a crisis statement it called the upcoming-interviews tool before its crisis answer, which fails a required case. Earlier, GPT-5.6 Luna was the only setup to pass 29 of 29. A text-only Claude screen showed no clear win at about 15 times the cost per turn, so Louie kept LUMO on OpenAI models.",
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     anchor: "decision-models",
     tags: ["model selection", "gpt-6", "claude", "safety", "cost", "evaluation"],
     skills: ["AI Evaluation", "Product Judgment"],
@@ -674,7 +674,7 @@ export const evidence: EvidenceItem[] = [
       "A gate scoring 31 of 32 cannot show a gain, so a separate hard set came from real conversations, with rules that stop the prompt learning the test.",
     detail:
       "Sources: real member conversations and open bug reports; only aggregate notes went into the repository. 21 seeds grew to 31 cases, split into working and held-out sets. A test fails if the prompt holds any six-word run from a hard case. LUMO passed 87% of the hard set, above the 85% tuning line, so Louie paused tuning and fixed a memory bug first: LUMO saved its own suggestions as member facts.",
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     anchor: "decision-hard-set",
     tags: ["hard set", "held-out", "overfitting", "evaluation", "real conversations", "tuning"],
     skills: ["AI Evaluation", "Research"],
@@ -688,7 +688,7 @@ export const evidence: EvidenceItem[] = [
       "Claude labelled 25 grader verdicts blind and Louie ruled on each disagreement: 24 of 25 agreed, Cohen's kappa 0.92.",
     detail:
       "Louie started labelling and found the questions hard to answer with confidence, so the method changed. The one disagreement was a product question: a suggested line nudged a member to overstate compliance experience, and Louie ruled that LUMO should suggest only claims the member has made. With 25 items the range is wide; this is a first check, model plus owner review, not a human panel.",
-    route: "/work/lumo-evals",
+    route: "/work/lumo-bench",
     anchor: "decision-grader",
     tags: ["grader", "llm judge", "human labels", "agreement", "evaluation", "lumo bench"],
     skills: ["AI Evaluation", "Product Judgment"],
