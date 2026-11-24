@@ -4,7 +4,9 @@ Status: in progress. Done 2026-11-23: icons (step 2), the Sentry page with
 its hero (steps 3 and 4 for Sentry), homepage grouping; merged in PR 20 and
 live at louiesakoda.com/work/lumo-sentry. Done 2026-11-23: the Bench
 move to /work/lumo-bench with a redirect, and the family strip (step 1).
-Next: Bench updates (step 5). Louie's answers in this file are
+Done 2026-11-23: Bench updates (step 5), with Louie's
+approval of each fact in `plans/052-bench-facts.md`. Open: the security
+case results, after plan 644 PR 3 runs in Offboard. Louie's answers in this file are
 from the session of 2026-11-23.
 
 ## Goal

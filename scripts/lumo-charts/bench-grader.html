@@ -1,0 +1,73 @@
+<!doctype html>
+<!--
+  LUMO Bench second-grader audit (Plan 052, facts B1 to B3, approved by
+  Louie 2026-11-23). Rendered to public/work/lumo-bench/grader.webp.
+  Source: Offboard documentation/qa/ai-runs/2026-11-10.md and commit
+  d43482092, read at origin/main 1e728a422.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--bench); --brand-soft: var(--bench-soft); --brand-line: var(--bench-line); }
+  .lede { margin: 22px 0 0; max-width: 58em; font: 400 25px/1.4 var(--display); color: var(--muted); }
+
+  .row { margin-top: 60px; }
+  .row .head { display: flex; justify-content: space-between; align-items: baseline; font: 500 20px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--quiet); }
+  .bar { display: flex; height: 72px; margin-top: 16px; border-radius: 14px; overflow: hidden; gap: 4px; }
+  .seg { display: flex; align-items: center; padding: 0 22px; font: 600 24px/1 var(--display); white-space: nowrap; }
+  .seg.up { background: var(--track); color: var(--ink); }
+  .seg.over { background: var(--brand); color: var(--canvas); }
+  .seg.rest { background: var(--brand-soft); color: var(--ink); border: 1.5px solid var(--brand-line); }
+
+  .zoom { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 72px; }
+  .zoom .bar { height: 56px; }
+  .after { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; margin-top: 22px; }
+  .big { font: 700 112px/0.9 var(--display); letter-spacing: -0.04em; color: var(--brand); }
+  .after p { margin: 0; font: 400 23px/1.4 var(--display); color: var(--muted); }
+  .quote { margin-top: 18px; padding: 22px 26px; border-radius: 16px; background: var(--raised); font: 400 23px/1.45 var(--display); color: var(--muted); }
+  .quote b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-bench/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Bench · Offboard · Nov 2026</div>
+      <h1>A second grader checked the first</h1>
+    </div>
+  </header>
+  <p class="lede">Claude Fable 5.2, from another vendor, read every failed verdict from 297 October and November runs: 492 failed verdicts out of 6,671.</p>
+
+  <div class="row">
+    <div class="head"><span>492 failed verdicts</span><span>Second grader</span></div>
+    <div class="bar">
+      <div class="seg up" style="flex: 441">Agreed: 441</div>
+      <div class="seg over" style="flex: 51; min-width: 230px">Overturned: 51</div>
+    </div>
+  </div>
+
+  <section class="zoom">
+    <div>
+      <div class="row" style="margin-top:0">
+        <div class="head"><span>The 51 wrong fails</span></div>
+        <div class="bar">
+          <div class="seg over" style="flex: 34">Three questions: 34</div>
+          <div class="seg rest" style="flex: 17">Other: 17</div>
+        </div>
+      </div>
+      <div class="quote">Example: the grader read <b>“click the button on the card”</b> as “the member is on the application page”, and failed a correct reply 22 times.</div>
+    </div>
+    <div>
+      <div class="row" style="margin-top:0">
+        <div class="head"><span>The three questions, reworded</span></div>
+      </div>
+      <div class="after"><span class="big">275/275</span><p>past replies graded right by the new questions.</p></div>
+      <div class="after"><span class="big">8</span><p>bad replies written to fail. The new questions still catch them.</p></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

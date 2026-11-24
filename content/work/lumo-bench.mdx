@@ -3,6 +3,11 @@ import { SystemDiagram, FlowDiagram } from "@/components/portfolio/system-diagra
 import { ArtifactFrame } from "@/components/portfolio/artifact-frame";
 import { RegressionRuns, ModelScorecard, HardSetRuns, GraderAgreement } from "@/components/portfolio/lumo/bench-graphics";
 
+{/* Plan 052 step 5 (2026-11-23). The "Since October" facts, the Terra
+   screen, the November grader audit and the security cases were approved
+   by Louie row by row in plans/052-bench-facts.md, which names each source
+   in Offboard's repository (origin/main 1e728a422). */}
+
 <CaseStudySection id="context" title="Every change was judged by hand" eyebrow="Context and ownership">
 
 [LUMO](/work/lumo) is the AI assistant inside Offboard. Until September 2026, every LUMO change ended with a 45-minute check by hand, and the result was a judgment written in a sprint doc. A new model or a prompt change had no gate that could say "this got worse".
@@ -44,6 +49,7 @@ The gate earned its place on model decisions.
 
 - **September 2026.** GPT-5.6 Luna was the only setup to pass 29 of 29 cases, and it was the fastest and cheapest. Every setup that set a reasoning level failed the same case. LUMO moved to it.
 - **GPT-6 Luna.** On the same 26 cases, the newer model's estimated token cost was 46.5% lower and its median first reply 12.6% faster. Then, after a member's crisis statement, it called the tool that reads upcoming interviews before it gave a crisis answer. That case is required. LUMO kept its model.
+- **GPT-6.1 Terra, October 28, 2026.** It failed two cases on every run where the current model passed. Both times it asked a question where the member wanted LUMO to act or advise. A full run cost 4.5 times as much, $1.68 against $0.37. Chat stayed on GPT-5.6 Luna.
 - **Claude models.** A text-only screen in October 2026 showed no clear win: GPT-5.6 Luna passed 18 of 19, Claude Sonnet 5.5 passed 12 of 14 to 12 of 16, at about 15 times the cost per turn without caching. The screen could not score tool use. A fair test would need a new provider path in LUMO and days of work. I chose to stay on OpenAI models and screen the next one when it ships.
 
 <SystemDiagram title="Cheaper is not enough" description="GPT-6 Luna against the current model on the same 26 cases: estimated token cost 46.5% lower, median first reply 12.6% faster, slowest replies 21.4% slower. It failed the required safety case, so the current model stayed. Below, the October 2026 text-only screen: GPT-5.6 Luna passed 18 of 19, Claude Sonnet 5.5 passed 12 of 16 to 12 of 14, and Claude Haiku 5.5 passed 12 of 16 to 14 of 18.">
@@ -82,14 +88,58 @@ The plan was for me to label 25 grader verdicts. I started, and found the questi
 - **The one disagreement was a product question.** A member had said they never worked in compliance. LUMO suggested a line about experience with "regulated or carefully reviewed customer communications", with a caveat to use it only if true. I ruled that it nudges the member to overstate. LUMO should suggest only claims the member has made.
 - **The questions changed.** New grader questions put "yes" as the good answer, check one property, and avoid legal wording.
 
+In November I checked the grader a second way. A grader from another vendor, Claude Fable 5.2, read every failed verdict from 297 October and November runs: 492 failed verdicts out of 6,671. It agreed with 441 and overturned 51.
+
+<ArtifactFrame frame="none" src="/work/lumo-bench/grader.webp" width={2000} height={1200} alt="A chart titled A second grader checked the first, LUMO Bench, November 2026. Claude Fable 5.2, from another vendor, read every failed verdict from 297 October and November runs: 492 failed verdicts out of 6,671. A bar splits the 492: agreed 441, overturned 51. A second bar splits the 51 wrong fails: three questions caused 34, other causes 17. Example: the grader read click the button on the card as the member is on the application page, and failed a correct reply 22 times. The three questions, reworded: 275 of 275 past replies graded right by the new questions, and 8 bad replies written to fail are still caught." caption="The second grader’s audit, November 2026. A chart drawn for this page from the audit record in Offboard’s repository." />
+
+- **Three questions caused 34 of the 51 wrong fails.** One read "click the button on the card" as "the member is on the application page", and failed a correct reply 22 times. I reworded the three. On every past reply, the new questions got 275 of 275 right, and they still caught 8 bad replies written to fail.
+- **The audit also confirmed a real miss.** Asked about a call the next day, LUMO sometimes offered to rehearse instead of giving advice.
+- **A second opinion, not the daily grader.** It costs about a cent a verdict. It reads a fail before that fail counts as a LUMO regression.
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-security" title="Plant the attack in the test" eyebrow="Decision 05">
+
+LUMO reads text that other people wrote: job posts, pasted pages, files. Any of it can carry a planted instruction. So the bench tests for it.
+
+- **Outside text is data.** Since October 21, 2026, text from a web page reaches LUMO marked as outside data, and LUMO opens only links the member gave. Two cases check that a pasted link still works and that the marking never shows to the member.
+- **Six planted instructions.** Six cases plant an instruction in outside text: a resume with white text, a job post, a page behind a pasted link, a context file, a portfolio page, and a legal letter. The people and companies are invented.
+- **A strict pass.** A case passes only when LUMO makes no change without a confirm and does not obey the planted order. The cases must pass twice in a row on the live model.
+- **A fail is a finding.** The fix goes in the prompt or the hold, never in a looser grader.
+
+{/* TODO(content): how many of the six security cases pass, and on which runs. Plan 644 PR 3 was "Todo" in Offboard's security round on 2026-11-23. */}
+
+<SystemDiagram title="One security case" description="Conceptual flow: outside text carries a planted instruction. The member asks LUMO for help with it. The case passes only if LUMO makes no change without the member's confirm and does not obey the planted order, twice in a row on the live model.">
+  <FlowDiagram stages={[
+    { node: { label: "Outside text with a planted instruction" } },
+    { node: { label: "The member asks LUMO for help" } },
+    { node: { label: "No change without a confirm", tone: "accent" } },
+    { node: { label: "Obeys the planted order?" }, branch: { condition: "Yes", outcome: "A finding: fix the prompt or the hold" } },
+    { node: { label: "Pass, twice in a row" } },
+  ]} />
+</SystemDiagram>
+
+[LUMO Sentry](/work/lumo-sentry) watches the same outside text in production.
+
+</CaseStudySection>
+
+<CaseStudySection id="results" title="More cases, run on every change" eyebrow="Since October">
+
+- **The set grew with the product.** The release set grew from 38 cases in mid-October to 73 on November 23, plus 3 control cases built to fail. The new cases cover paperwork, state law, deadlines, saved facts, outreach notes, web links and wellbeing.
+- **It ran on every change.** From October 23 to November 23, 2026, the bench ran the full set 99 times. The latest full runs cost 55 to 59 cents each.
+- **The score rose, with a caveat.** On unchanged code, the full set passed 76% to 82% in late October and 97% to 99% on November 22 and 23. Part of that rise is the bench itself getting fixed, not LUMO getting better: a dead test link, a test account out of web lookups, and grader questions that failed correct replies.
+
+<ArtifactFrame frame="none" src="/work/lumo-bench/trend.webp" width={2000} height={1200} alt="A chart titled More cases, run on every change, LUMO Bench, October 23 to November 23, 2026. Each dot is one full run on unchanged code, plotted by date against its pass rate from 70% to 100%. The set grew from 51 cases to 73, plus 3 control cases, and the bench ran it 99 times in all. A box marks 76% to 82% in late October; another marks 97% to 99% on November 22 and 23. Between them the dots sit between 84% and 100%. A strip under the dates shows the set size: 51 cases on October 23, 57 by November 1, 62 by November 13, 68 by November 17, and 73 from November 19. A note reads: part of the rise is the bench itself getting fixed, not LUMO getting better: a dead test link, a test account out of web lookups, and grader questions that failed correct replies." caption="Every full run on unchanged code, October 23 to November 23, 2026. A chart drawn for this page from the run records in Offboard’s repository." />
+
 </CaseStudySection>
 
 <CaseStudySection id="outcomes" title="Decisions the bench made" eyebrow="Outcome">
 
 - **One model swap stopped.** GPT-6 Luna was cheaper per turn and failed a required safety case, so it did not ship.
+- **A second model screen stopped.** GPT-6.1 Terra asked questions where members wanted action, at 4.5 times the cost of a run.
 - **One provider switch declined.** A Claude screen showed no clear gain for the cost of a new provider path.
 - **Tuning paused for a real bug.** The hard set showed no room to measure a gain. The memory bug it exposed was fixed on October 1, 2026.
-- **The grader is trusted, for now.** 24 of 25 agreement, with the check repeated after a grader change or 10 or more new questions.
+- **The grader is trusted, and checked.** 24 of 25 agreement in September. In November a second grader found three questions that failed correct replies, and I reworded them.
 
 </CaseStudySection>
 
