@@ -695,6 +695,64 @@ export const evidence: EvidenceItem[] = [
     evidenceType: "research",
   },
 
+  // Plan 052 step 5: approved by Louie in plans/052-bench-facts.md.
+  {
+    id: "lumo-bench-terra-screen",
+    project: "offboard",
+    title: "GPT-6.1 Terra screened and not adopted",
+    summary:
+      "On October 28, 2026, GPT-6.1 Terra failed two cases on every run where the current model passed, so LUMO chat stayed on GPT-5.6 Luna.",
+    detail:
+      "Both times Terra asked a question where the member wanted LUMO to act or advise. A full bench run cost 4.5 times as much: $1.68 against $0.37.",
+    route: "/work/lumo-bench",
+    anchor: "decision-models",
+    tags: ["model selection", "gpt-6.1", "terra", "cost", "evaluation", "lumo bench"],
+    skills: ["AI Evaluation", "Product Judgment"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-bench-second-grader",
+    project: "offboard",
+    title: "A second grader audited the LUMO Bench grader",
+    summary:
+      "Claude Fable 5.2, from another vendor, read 492 failed verdicts from 297 October and November runs: it agreed with 441 and overturned 51.",
+    detail:
+      "Three grader questions caused 34 of the 51 wrong fails; one read \"click the button on the card\" as \"the member is on the application page\" and failed a correct reply 22 times. Louie reworded the three. On every past reply the new questions got 275 of 275 right and still caught 8 bad replies written to fail. The audit also confirmed a real miss: asked about a call the next day, LUMO sometimes offered to rehearse instead of giving advice. At about a cent a verdict, the second grader is a second opinion before a fail counts as a regression, not the daily grader.",
+    route: "/work/lumo-bench",
+    anchor: "decision-grader",
+    tags: ["grader", "llm judge", "audit", "second grader", "evaluation", "lumo bench"],
+    skills: ["AI Evaluation", "Research"],
+    evidenceType: "research",
+  },
+  {
+    id: "lumo-bench-security-cases",
+    project: "offboard",
+    title: "LUMO Bench tests planted instructions",
+    summary:
+      "Six bench cases plant an instruction in outside text, and a case passes only when LUMO makes no change without a confirm and does not obey the planted order.",
+    detail:
+      "The planted text sits in a resume with white text, a job post, a page behind a pasted link, a context file, a portfolio page, and a legal letter, with invented people and companies. The cases must pass twice in a row on the live model; a fail is a finding, fixed in the prompt or the hold, never in a looser grader. Since October 21, 2026, web text reaches LUMO marked as outside data, and two cases check that a pasted link still works and the marking never shows to the member.",
+    route: "/work/lumo-bench",
+    anchor: "decision-security",
+    tags: ["prompt injection", "security testing", "planted instructions", "evaluation", "lumo bench"],
+    skills: ["AI Evaluation", "AI Safety"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-bench-since-october",
+    project: "offboard",
+    title: "LUMO Bench since October 2026",
+    summary:
+      "The release set grew from 38 cases in mid-October to 73 on November 23, and the bench ran the full set 99 times from October 23 to November 23.",
+    detail:
+      "The new cases cover paperwork, state law, deadlines, saved facts, outreach notes, web links and wellbeing. On unchanged code the full set passed 76% to 82% in late October and 97% to 99% on November 22 and 23. Part of that rise is the bench itself getting fixed, not LUMO getting better: a dead test link, a test account out of web lookups, and grader questions that failed correct replies. The latest full runs cost 55 to 59 cents each.",
+    route: "/work/lumo-bench",
+    anchor: "results",
+    tags: ["regression testing", "pass rate", "evaluation", "lumo bench", "results"],
+    skills: ["AI Evaluation", "Systems Design"],
+    evidenceType: "outcome",
+  },
+
   // ------------------------------------------------------ LUMO Sentry (Plan 052)
   // Restates the page only. The page leaves out ban conditions, limits,
   // intervals and probe results on purpose; so do these entries.

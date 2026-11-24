@@ -75,6 +75,8 @@ export const LUMO_BENCH_ANCHORS = [
   { id: "decision-models", label: "Model swaps" },
   { id: "decision-hard-set", label: "A set that can show gains" },
   { id: "decision-grader", label: "Checking the grader" },
+  { id: "decision-security", label: "Security cases" },
+  { id: "results", label: "Since October" },
   { id: "outcomes", label: "Outcomes" },
   { id: "learnings", label: "Learnings" },
 ] as const satisfies readonly Anchor[];

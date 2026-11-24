@@ -1,0 +1,101 @@
+<!doctype html>
+<!--
+  LUMO Bench trend (Plan 052, facts A1 to A4, approved by Louie 2026-11-23).
+  Rendered to public/work/lumo-bench/trend.webp by render.cjs.
+  Data: every baseline run (unchanged code, first attempt, 45 or more cases)
+  in Offboard's documentation/qa/ai-runs/2026-10-23.md to 2026-11-23.md,
+  read at origin/main 1e728a422. Retries are left out.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--bench); --brand-soft: var(--bench-soft); --brand-line: var(--bench-line); }
+  .lede { margin: 22px 0 0; max-width: 56em; font: 400 25px/1.4 var(--display); color: var(--muted); }
+  svg { display: block; margin-top: 30px; overflow: visible; }
+  svg text { font-family: var(--mono); font-weight: 500; }
+  .note { display: flex; gap: 18px; align-items: baseline; margin-top: 30px; padding: 22px 28px; border-radius: 16px; background: var(--raised); font: 400 23px/1.4 var(--display); color: var(--muted); }
+  .note b { flex: none; font: 500 18px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-bench/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Bench · Offboard · Oct 23 to Nov 23, 2026</div>
+      <h1>More cases, run on every change</h1>
+    </div>
+  </header>
+  <p class="lede">Each dot is one full run on unchanged code. The set grew from 51 cases to 73, plus 3 control cases, and the bench ran it 99 times in all.</p>
+  <svg id="chart" width="1776" height="560" viewBox="0 0 1776 560"></svg>
+  <div class="note"><b>Read with care</b><span>Part of the rise is the bench itself getting fixed, not LUMO getting better: a dead test link, a test account out of web lookups, and grader questions that failed correct replies.</span></div>
+</main>
+<script>
+  // [label, MM-DD, UTC hour, passed, cases]
+  const runs = [["off1054-t-baseline-1","10-23",22.65,40,51],["off1054-t-baseline-2","10-24",0.7,40,51],["off1074-r3-baseline-1","10-26",17.5,42,51],["off1074-r3-baseline-2","10-26",18.53,39,51],["off1110-baseline-1","10-27",17.17,48,51],["off1110-baseline-2","10-27",18.7,46,51],["off1110-baseline-3","10-27",20.68,44,51],["s1003-baseline-1","10-28",3.07,43,51],["s1003-baseline-2","10-28",3.5,47,51],["s1003-baseline-5","10-28",7.53,44,51],["s1003-baseline-6","10-28",8.03,49,51],["s1010-baseline-1","10-28",23.32,47,52],["s1010-baseline-2","10-28",23.53,48,52],["s1021-baseline-1","10-31",3.92,50,52],["s1021-baseline-2","10-31",4.13,50,52],["s1026-baseline-1","10-31",20.03,50,55],["s1026-baseline-2","10-31",20.25,52,55],["s1030-baseline-1","11-01",13.85,53,57],["s1030-baseline-2","11-01",14.07,55,57],["s1121-baseline-1","11-10",23.55,57,59],["s1121-baseline-2","11-10",23.8,57,59],["s1135-baseline-1","11-12",4.83,61,61],["s1135-baseline-2","11-12",5.08,60,61],["s1139-baseline-2","11-13",6.02,60,62],["s1139-r2-baseline-1","11-15",4.75,62,62],["s1139-r2-baseline-2","11-15",4.98,62,62],["s1143r-baseline-1","11-17",23.78,63,68],["s1143r-baseline-2","11-18",0.08,61,68],["s1215-baseline-1","11-19",0.18,67,73],["s1215-baseline-2","11-19",0.45,70,73],["s1250-baseline-1","11-22",16.07,72,73],["s1250-baseline-2","11-22",16.32,72,73],["s1250-baseline-3","11-23",16.73,71,73]];
+
+  const css = getComputedStyle(document.documentElement);
+  const c = (n) => css.getPropertyValue(n).trim();
+  const svg = document.getElementById("chart");
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, text) => {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (text !== undefined) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  };
+
+  const day = (md, h) => {
+    const [m, d] = md.split("-").map(Number);
+    return (m === 10 ? d : 31 + d) + h / 24; // days from Oct 0
+  };
+  const x0 = 120, x1 = 1776, start = day("10-23", 0), end = day("11-24", 0);
+  const x = (t) => x0 + ((t - start) / (end - start)) * (x1 - x0);
+  const yTop = 10, yBot = 380, lo = 70, hi = 100;
+  const y = (pct) => yBot - ((pct - lo) / (hi - lo)) * (yBot - yTop);
+
+  // Grid and percent labels.
+  for (const p of [70, 80, 90, 100]) {
+    el("line", { x1: x0, x2: x1, y1: y(p), y2: y(p), stroke: c("--line"), "stroke-width": 1.5 });
+    el("text", { x: x0 - 22, y: y(p) + 7, "text-anchor": "end", fill: c("--quiet"), "font-size": 20 }, `${p}%`);
+  }
+
+  // Date ticks.
+  for (const md of ["10-23", "10-30", "11-06", "11-13", "11-20"]) {
+    const [m, d] = md.split("-").map(Number);
+    const label = `${m === 10 ? "Oct" : "Nov"} ${d}`;
+    el("text", { x: x(day(md, 0)), y: yBot + 40, "text-anchor": "middle", fill: c("--quiet"), "font-size": 20 }, label);
+  }
+
+  // Bands for the two approved ranges.
+  const band = (a, b, from, to, text, anchor, below) => {
+    el("rect", { x: x(a) - 16, y: y(to) - 14, width: x(b) - x(a) + 32, height: y(from) - y(to) + 28, rx: 14, fill: "none", stroke: c("--brand-line"), "stroke-width": 2, "stroke-dasharray": "6 6" });
+    el("text", { x: anchor === "end" ? x(b) + 16 : x(a) - 16, y: below ? y(from) + 50 : y(to) - 30, "text-anchor": anchor, fill: c("--brand"), "font-size": 22 }, text);
+  };
+  band(day("10-23", 22.65), day("10-26", 18.53), 76, 82, "76% to 82%, late October", "start", true);
+  band(day("11-22", 16.07), day("11-23", 16.73), 97, 99, "97% to 99%, Nov 22 and 23", "end", false);
+
+  // One dot per run.
+  for (const [, md, h, p, n] of runs) {
+    el("circle", { cx: x(day(md, h)), cy: y((p / n) * 100), r: 9, fill: c("--brand") });
+  }
+
+  // Set size, as a step line under the axis.
+  const yS = 470;
+  el("text", { x: x0 - 22, y: yS + 7, "text-anchor": "end", fill: c("--quiet"), "font-size": 20 }, "CASES");
+  el("line", { x1: x0, x2: x1, y1: yS, y2: yS, stroke: c("--track"), "stroke-width": 14, "stroke-linecap": "round" });
+  const steps = [];
+  for (const [, md, h, , n] of runs) if (!steps.length || steps[steps.length - 1][1] !== n) steps.push([day(md, h), n]);
+  steps.forEach(([t, n], i) => {
+    const next = i + 1 < steps.length ? steps[i + 1][0] : end;
+    el("line", { x1: x(t), x2: x(next), y1: yS, y2: yS, stroke: c("--brand"), "stroke-width": 14, opacity: 0.25 + 0.75 * (i / (steps.length - 1)) });
+    if (n === 51 || n === 57 || n === 62 || n === 68 || n === 73) {
+      el("text", { x: x(t), y: yS + 50, "text-anchor": "start", fill: c("--ink"), "font-size": 22 }, String(n));
+    }
+  });
+</script>
+</body>
+</html>

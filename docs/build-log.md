@@ -1282,3 +1282,25 @@ Plan 052, step 1.
   first place `WorkProject.icon` renders. A project joins with
   `family: "lumo"` in `projects.ts`; a fourth sub-brand is one entry.
   Icons show at 40px, the smallest size where a badge reads.
+
+### LUMO Bench updates, November 23, 2026
+
+Plan 052, step 5. Louie approved every new fact row by row in
+`plans/052-bench-facts.md`, which names each source in Offboard's
+repository (`origin/main` `1e728a422`).
+
+- **New sections.** Decision 05, "Plant the attack in the test"
+  (`#decision-security`): the outside-text marking since October 21 and
+  the six planted-instruction cases. Their pass counts are a hidden
+  `TODO(content)` note: plan 644 PR 3 had not run on this date. "Since
+  October" (`#results`): the set grew from 38 to 73 cases, 99 full runs,
+  and the pass rate on unchanged code, with the caveat that part of the
+  rise is the bench itself getting fixed.
+- **Added to existing sections.** The GPT-6.1 Terra screen (Decision 02)
+  and the November second-grader audit (Decision 04).
+- **Images.** The hero and case P1 are redrawn in the shared LUMO chart
+  frame with the Bench yellow; their numbers are unchanged. Two new
+  charts: `trend.webp` (every first-attempt baseline run, October 23 to
+  November 23) and `grader.webp`. Sources:
+  `scripts/lumo-charts/bench-*.html`.
+- **Ask Louie.** Four evidence entries for the new facts.
