@@ -1,0 +1,44 @@
+/*
+ * The shared frame for LUMO sub-brand charts (Plan 052): one canvas, one
+ * type pair, one header with the sub-brand face. Each chart sets --brand to
+ * its sub-brand accent. These are drawn images, not site UI, so the colors
+ * live here rather than in app/globals.css.
+ *
+ * Accents (Louie, 2026-11-23): Bench yellow, Sentry green. LUMO keeps its
+ * blue and lilac.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@500&display=block");
+
+:root {
+  --canvas: #16171b;
+  --raised: #1f2026;
+  --track: #2a2b32;
+  --line: #34353d;
+  --ink: #f3f3f5;
+  --muted: #a3a3ad;
+  --quiet: #7b7b86;
+  --alarm: #f07a5a;
+
+  --sentry: #4fdc9f;
+  --sentry-soft: rgba(79, 220, 159, 0.09);
+  --sentry-line: rgba(79, 220, 159, 0.45);
+  --bench: #f5c84c;
+  --bench-soft: rgba(245, 200, 76, 0.09);
+  --bench-line: rgba(245, 200, 76, 0.45);
+
+  --display: "Inter", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--canvas); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+.sheet { width: 2000px; height: 1200px; padding: 96px 112px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+
+.masthead { display: flex; align-items: center; gap: 32px; }
+.masthead .mark { width: 120px; height: 120px; object-fit: contain; }
+.eyebrow { font: 500 22px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+h1 { margin: 16px 0 0; font: 700 64px/1.05 var(--display); letter-spacing: -0.03em; }
+
+.num { font: 500 20px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+.lead .num, .num.lead { color: var(--brand); }

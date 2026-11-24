@@ -60,6 +60,15 @@ export const PAGE_QUESTIONS: readonly PageQuestions[] = [
     ],
   },
   {
+    route: "/work/lumo-sentry",
+    name: "LUMO Sentry Security Agent",
+    questions: [
+      { text: "What may LUMO Sentry do without a person?", slug: "lumo-sentry-actions" },
+      { text: "How does LUMO Sentry keep AI costs low?", slug: "lumo-sentry-cost" },
+      { text: "How does LUMO Sentry stop planted instructions?", slug: "lumo-sentry-injection" },
+    ],
+  },
+  {
     route: "/work/ck12-analytics",
     name: "CK-12 Foresights",
     questions: [

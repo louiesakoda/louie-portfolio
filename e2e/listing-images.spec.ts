@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 // "/": the stacked rows show their screenshots under the paragraph on a
-// narrow screen; three of the eight rows are recordings, not images.
-// "/work": one screenshot per work card, eight.
-for (const [path, count] of [["/", 5], ["/work", 8]] as const) {
+// narrow screen; three of the nine rows are recordings, not images.
+// "/work": one screenshot per work card, nine.
+for (const [path, count] of [["/", 6], ["/work", 9]] as const) {
   test(`${path} loads and its project images decode`, async ({ page }) => {
     if (path === "/") await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(path);

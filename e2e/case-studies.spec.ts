@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_EVALS_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
+import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_EVALS_ANCHORS, LUMO_SENTRY_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
 
 /**
  * Case studies (spec §13, §14, §25, §26, §34).
@@ -23,6 +23,7 @@ const STUDIES = [
   },
   { name: "LUMO Career Agent", path: "/work/lumo", anchors: LUMO_ANCHORS, title: "LUMO Career Agent" },
   { name: "LUMO Bench & Evals System", path: "/work/lumo-evals", anchors: LUMO_EVALS_ANCHORS, title: "LUMO Bench & Evals System" },
+  { name: "LUMO Sentry Security Agent", path: "/work/lumo-sentry", anchors: LUMO_SENTRY_ANCHORS, title: "LUMO Sentry Security Agent" },
   {
     name: "CK-12 Flexi AI Tutor",
     path: "/work/flexi",

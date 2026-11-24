@@ -16,6 +16,7 @@ export const ROUTES = [
   "/work/offboard",
   "/work/lumo",
   "/work/lumo-evals",
+  "/work/lumo-sentry",
   "/work/flexi",
   "/ai-systems",
   "/experiments",
@@ -132,6 +133,17 @@ export const TRANSFERSIGHT_ANCHORS = [
   { id: "limits", label: "Limits and next steps" },
 ] as const satisfies readonly Anchor[];
 
+export const LUMO_SENTRY_ANCHORS = [
+  { id: "context", label: "Context" },
+  { id: "decision-rules", label: "Rules first, AI on flags" },
+  { id: "decision-actions", label: "Act only on undoable things" },
+  { id: "decision-ai-input", label: "Outside text is data" },
+  { id: "decision-red-team", label: "A weekly red team" },
+  { id: "decision-visibility", label: "Staff only until proof" },
+  { id: "outcomes", label: "Outcomes" },
+  { id: "learnings", label: "Learnings" },
+] as const satisfies readonly Anchor[];
+
 export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
   "/work/ck12-analytics": ANALYTICS_ANCHORS,
   "/experiments/neuron-shift": NEURON_ANCHORS,
@@ -140,6 +152,7 @@ export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
   "/work/offboard": OFFBOARD_ANCHORS,
   "/work/lumo": LUMO_ANCHORS,
   "/work/lumo-evals": LUMO_EVALS_ANCHORS,
+  "/work/lumo-sentry": LUMO_SENTRY_ANCHORS,
   "/work/flexi": FLEXI_ANCHORS,
 };
 

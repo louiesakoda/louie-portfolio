@@ -1,0 +1,130 @@
+<!doctype html>
+<!--
+  LUMO Sentry hero (Plan 052). Rendered to public/work/lumo-sentry/hero.webp
+  by scripts/lumo-charts/render.cjs. Shares lumo-charts.css with the other
+  LUMO sub-brand charts, so Bench and Sentry read as one family.
+  Text restates content/work/lumo-sentry.mdx; it adds no claim.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--sentry); --brand-soft: var(--sentry-soft); --brand-line: var(--sentry-line); }
+
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 64px; }
+  .step { position: relative; border-top: 2px solid var(--line); padding-top: 28px; }
+  .step.lead { border-top-color: var(--brand); }
+  .step + .step::before {
+    content: ""; position: absolute; left: -32px; top: -9px;
+    width: 16px; height: 16px; border-right: 2px solid var(--quiet); border-top: 2px solid var(--quiet);
+    transform: rotate(45deg); background: var(--canvas);
+  }
+  .step h2 { margin: 14px 0 0; font: 700 40px/1.1 var(--display); letter-spacing: -0.02em; }
+  .step p { margin: 14px 0 0; font: 400 24px/1.4 var(--display); color: var(--muted); }
+
+  .chips { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+  .chip { display: inline-flex; align-items: center; gap: 12px; padding: 12px 16px; border: 1.5px solid var(--line); border-radius: 12px; font: 500 22px/1 var(--display); color: var(--ink); width: fit-content; }
+  .chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); }
+
+  .meter { margin-top: 30px; }
+  .meter .bar { height: 14px; border-radius: 7px; background: var(--track); overflow: hidden; }
+  .meter .bar { position: relative; overflow: visible; }
+  .meter .bar::after { content: ""; position: absolute; right: 0; top: -8px; width: 4px; height: 30px; border-radius: 2px; background: var(--brand); }
+  .meter .scale { display: flex; justify-content: space-between; margin-top: 12px; font: 500 18px/1 var(--mono); color: var(--quiet); }
+
+  .box { border-radius: 16px; padding: 20px 22px; margin-top: 22px; }
+  .box.alone { background: var(--brand-soft); border: 1.5px solid var(--brand-line); }
+  .box.else { border: 1.5px dashed var(--line); margin-top: 14px; }
+  .box .k { font: 500 17px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand); }
+  .box.else .k { color: var(--quiet); }
+  .box ul { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font: 500 22px/1.25 var(--display); }
+  .box.else .v { margin-top: 10px; font: 500 22px/1.25 var(--display); }
+
+  .undo { margin-top: 30px; display: flex; flex-direction: column; gap: 12px; }
+  .undo .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px 14px 20px; border: 1.5px solid var(--line); border-radius: 14px; font: 500 21px/1.2 var(--display); }
+  .undo .row span:first-child { color: var(--muted); }
+  .undo .btn { font: 600 19px/1 var(--display); padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--canvas); }
+
+  .band { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 40px; margin-top: 64px; padding: 30px 36px; border-radius: 20px; background: var(--raised); }
+  .band .k { font: 500 20px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+  .band .t { font: 500 27px/1.35 var(--display); }
+  .band .t span { color: var(--muted); }
+  .verdicts { display: flex; gap: 14px; }
+  .verdict { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; font: 600 21px/1 var(--display); border: 1.5px solid var(--line); }
+  .verdict i { width: 10px; height: 10px; border-radius: 50%; }
+  .verdict.held i { background: var(--brand); }
+  .verdict.broken i { background: var(--alarm); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-sentry/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Sentry · Offboard · 2026</div>
+      <h1>How LUMO Sentry answers an attack</h1>
+    </div>
+  </header>
+
+  <section class="flow">
+    <div class="step lead">
+      <div class="num">01 · Watch</div>
+      <h2>Plain rules read everything</h2>
+      <p>Around the clock, at no AI cost.</p>
+      <div class="chips">
+        <span class="chip"><i></i>Sign-ups</span>
+        <span class="chip"><i></i>Sign-ins</span>
+        <span class="chip"><i></i>Outside text LUMO reads</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">02 · Decide</div>
+      <h2>AI reads only what they flag</h2>
+      <p>A second read on a short excerpt. At the cap, the rules decide alone.</p>
+      <div class="meter">
+        <div class="bar"></div>
+        <div class="scale"><span>AI spend</span><span>Stops at $25 a month</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">03 · Act or alert</div>
+      <h2>Alone only on what one click undoes</h2>
+      <div class="box alone">
+        <div class="k">Acts alone</div>
+        <ul>
+          <li>Ban a new, empty bot account</li>
+          <li>Block a throwaway email domain</li>
+          <li>Block one address at sign-up</li>
+        </ul>
+      </div>
+      <div class="box else">
+        <div class="k">Everything else</div>
+        <div class="v">An email to staff</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">04 · Undo</div>
+      <h2>Every action can be undone</h2>
+      <p>One email says what it did and how to undo it.</p>
+      <div class="undo">
+        <div class="row"><span>Banned a bot account</span><span class="btn">Undo</span></div>
+        <div class="row"><span>Blocked a domain</span><span class="btn">Undo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="k">Every Monday</div>
+    <div class="t">The red team attacks our own app with two test accounts.</div>
+    <div class="verdicts">
+      <span class="verdict held"><i></i>Held</span>
+      <span class="verdict broken"><i></i>Broken: urgent email</span>
+    </div>
+  </section>
+</main>
+</body>
+</html>
