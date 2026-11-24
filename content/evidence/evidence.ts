@@ -695,6 +695,108 @@ export const evidence: EvidenceItem[] = [
     evidenceType: "research",
   },
 
+  // ------------------------------------------------------ LUMO Sentry (Plan 052)
+  // Restates the page only. The page leaves out ban conditions, limits,
+  // intervals and probe results on purpose; so do these entries.
+  {
+    id: "lumo-sentry-context",
+    project: "offboard",
+    title: "Why LUMO Sentry exists",
+    summary:
+      "Two people were the whole security team. On November 21, 2026, a script made two bot accounts and nothing flagged it.",
+    detail:
+      "The app holds resumes, severance agreements and benefit facts, and LUMO and the ChatGPT and Claude connectors read text outsiders wrote. No member data was read in the November 21 case; Louie found it in a summary email. No job watched sign-ups, sign-ins or AI inputs. Louie made each call on what the sentry may watch, do alone and cost, and built it with AI coding agents in the loop.",
+    route: "/work/lumo-sentry",
+    anchor: "context",
+    tags: ["security", "lumo sentry", "bots", "sign-ups", "ai agent"],
+    skills: ["Product Strategy", "AI Safety"],
+    evidenceType: "strategy",
+  },
+  {
+    id: "lumo-sentry-rules-first",
+    project: "offboard",
+    title: "Rules watch, AI reads only what they flag",
+    summary:
+      "Plain rules watch around the clock at no AI cost; AI reads only flagged cases under a $25 monthly cap.",
+    detail:
+      "A model that reads all activity was rejected: it cannot fit the budget and adds a new place for member data. At the cap the AI reads stop and the rules keep running; a failed spend read counts as over the cap. The daily AI note gets kinds and counts, never an email address, an IP address or member content. IP-to-country runs on a list in the app's own database.",
+    route: "/work/lumo-sentry",
+    anchor: "decision-rules",
+    tags: ["cost", "rules", "ai budget", "privacy", "lumo sentry"],
+    skills: ["Systems Design", "AI Safety"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-sentry-undoable-actions",
+    project: "offboard",
+    title: "The sentry acts alone only on what one click undoes",
+    summary:
+      "Three actions only: ban a new, empty, scripted account; block a throwaway email domain; block one IP address at sign-up for a short time.",
+    detail:
+      "A wrong ban costs someone in a layoff more than a slow answer to a bot costs the team, so the sentry alerts on everything and never acts on an established account or one with member data. Every action has an undo and sends one email. A limit on bans in an hour is a circuit breaker. Each area runs in watch mode first, and Louie reads a week of 'would' actions; the gate is zero 'would' bans on real people.",
+    route: "/work/lumo-sentry",
+    anchor: "decision-actions",
+    tags: ["agent permissions", "autonomy", "undo", "human in the loop", "lumo sentry"],
+    skills: ["AI Safety", "Product Judgment"],
+    evidenceType: "product",
+  },
+  {
+    id: "lumo-sentry-outside-text",
+    project: "offboard",
+    title: "Outside text reaches LUMO as data, not an order",
+    summary:
+      "Job posts, documents, web pages, context files and Slack messages reach LUMO inside a wrapper, and a step that read flagged text holds every change for the member's confirm.",
+    detail:
+      "The member's typed message is never wrapped; their own resume is, because a file can hold text they did not write. A match does not block the text: it adds a notice and a finding. In a flagged step the confirm card adds: 'LUMO read outside text in this step. Check that this is what you asked for.' Six LUMO Bench cases plant an instruction in a resume, a job post, a pasted page, a context file, a portfolio page and a legal letter, and pass only when LUMO makes no unconfirmed change and does not obey.",
+    route: "/work/lumo-sentry",
+    anchor: "decision-ai-input",
+    tags: ["prompt injection", "untrusted content", "tool calling", "lumo bench", "lumo sentry"],
+    skills: ["AI Safety", "AI Evaluation"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-sentry-red-team",
+    project: "offboard",
+    title: "A weekly red team against our own app",
+    summary:
+      "Every Monday a job signs in as a test attacker and tries to read and change a test victim's data; each probe reports held or broken.",
+    detail:
+      "A write probe sets a field to the value it already has, so a broken defense changes nothing, and no probe touches a real member or stores data it got back. A broken probe is an urgent email. A weekly drill replays the November 21 case and expects the ban. A build check fails a pull request that adds member data, a file store or a function with no probe. It is an in-house test, not an outside penetration test.",
+    route: "/work/lumo-sentry",
+    anchor: "decision-red-team",
+    tags: ["red team", "security testing", "authorization", "lumo sentry"],
+    skills: ["Systems Design", "Quality"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-sentry-staff-only",
+    project: "offboard",
+    title: "LUMO Sentry stays staff only until there is proof",
+    summary:
+      "Members see nothing new: the sentry reports to staff, changes nothing on a member's account, and makes no public claim yet.",
+    detail:
+      "One urgent email for a real threat or any action taken, one daily digest for the rest, and a one-line digest on a quiet day, because a silent sentry and a dead one look the same. An odd sign-in reaches staff with steps to take by hand. A public claim waits until each claim has proof in the security claims file.",
+    route: "/work/lumo-sentry",
+    anchor: "decision-visibility",
+    tags: ["trust", "claims", "alerts", "lumo sentry"],
+    skills: ["Product Judgment"],
+    evidenceType: "strategy",
+  },
+  {
+    id: "lumo-sentry-outcome",
+    project: "offboard",
+    title: "How LUMO Sentry is judged",
+    summary:
+      "Stop line: more than one false ban of real people by January 5, 2027. Go line: a real finding acted on, zero false bans and four red team runs.",
+    detail:
+      "Results are not on the page yet; they come from the reviews of December 2026 and January 5, 2027. AI spend must stay under $25 every month. Do not state any result number for the sentry.",
+    route: "/work/lumo-sentry",
+    anchor: "outcomes",
+    tags: ["outcome", "metrics", "kill criteria", "lumo sentry"],
+    skills: ["Product Strategy"],
+    evidenceType: "outcome",
+  },
+
   // ------------------------------------------------------------------- Flexi
   {
     id: "flexi-classroom-scale",

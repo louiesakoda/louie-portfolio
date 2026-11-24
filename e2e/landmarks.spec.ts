@@ -17,6 +17,7 @@ const ROUTES = [
   "/work/offboard",
   "/work/lumo",
   "/work/lumo-evals",
+  "/work/lumo-sentry",
   "/work/flexi",
   "/ai-systems",
   "/experiments",

@@ -1232,3 +1232,35 @@ Plan 051:
   crop around the face (`public/portrait/louie-avatar.webp`, 256px),
   because the full portrait leaves the face too small in a 16px tab icon
   or a 32px circle. The older headshot `public/images/louie.jpg` is gone.
+
+### LUMO Sentry and the LUMO family, November 23, 2026
+
+Plan 052, first part. LUMO becomes a parent brand: LUMO, LUMO Bench and
+LUMO Sentry.
+
+- **New case study: LUMO Sentry** (`/work/lumo-sentry`,
+  `content/work/lumo-sentry.mdx`). Sources: Offboard's security sentry
+  spec, decision of 2026-11-22, and plans 642 to 645, read at Offboard
+  `origin/main` `56342b204`. Written as built, at Louie's request; the
+  sentry was in review and watch mode on this date.
+- **Deviation from the evidence rule, by design:** the page and its seven
+  evidence entries leave out the ban conditions, the ban limit, block
+  lengths, the run interval, the scan rules and the red team's probe
+  list, because an attacker can read the page. Results are hidden
+  `TODO(content)` markers until Offboard's reviews (2026-12-03,
+  2026-12-14, 2027-01-05).
+- **Sub-brand faces.** LUMO Bench (yellow, clipboard) and LUMO Sentry
+  (green, shield) are variants of the LUMO face, drafted with GPT Image
+  2.5 in ElevenLabs from the live `face.webp` and picked by Louie
+  (round 2, #3 each). `public/work/lumo-bench/face.webp`,
+  `public/work/lumo-sentry/face.webp`. Below 40px the badge does not
+  read; color and body shape still do.
+- **Hero diagram** `public/work/lumo-sentry/hero.webp`, rendered from
+  `scripts/lumo-charts/sentry-hero.html` by `scripts/lumo-charts/render.cjs`.
+  `lumo-charts.css` is the shared frame for the LUMO sub-brand charts;
+  the Bench charts move to it next.
+- **Homepage:** Sentry follows Bench, so the three LUMO rows sit together.
+  Three Ask Louie starter questions for the Sentry page. The red team
+  evidence entry is tagged "authorization", not "access control", so it
+  does not outrank `offboard-hitl-actions` for the Offboard control
+  question.

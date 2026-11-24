@@ -4,7 +4,7 @@ import type { CaseStudyBriefContent } from "@/components/portfolio/case-study-br
 
 /** Canonical editorial metadata. Claims and assets: plans/portfolio-strategy/. */
 export type WorkProject = {
-  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-evals" | "flexi";
+  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-evals" | "lumo-sentry" | "flexi";
   name: string;
   /** The name in the homepage list, when it differs from `name`. */
   shortName?: string;
@@ -114,7 +114,7 @@ export const workProjects: readonly WorkProject[] = [
     slug: "lumo-evals",
     name: "LUMO Bench",
     blurb: "An early product has too little data to train a model, so I built a bench instead: pass-or-fail cases, a harder set from real conversations, and a check on the grader itself. When a cheaper model failed a required safety case, LUMO kept its model.",
-    icon: { src: "/work/lumo/face.webp", width: 512, height: 512 },
+    icon: { src: "/work/lumo-bench/face.webp", width: 512, height: 512 },
     title: "LUMO Bench & Evals System",
     tags: ["AI evaluation", "Model selection", "Product judgment"],
     href: "/work/lumo-evals",
@@ -132,6 +132,41 @@ export const workProjects: readonly WorkProject[] = [
       problem: "Every LUMO change ended with a 45-minute check by hand, and the result was a judgment in a sprint doc. A model swap or prompt change had no regression gate, and an early product has too little data to train a model.",
       did: "I chose a bench over training: test cases with pass-or-fail criteria, a runner against the deployed assistant, a hard set built from real conversations, rules that stop the prompt from learning the test, and a check on how often the grader agrees with a careful reader.",
       result: "A cheaper GPT-6 Luna failed a required safety case, so LUMO kept its model. When LUMO passed 87% of the hard set, above the 85% line where a gain can be measured, I paused prompt tuning and fixed a memory bug first.",
+    },
+    featured: true,
+    plate: "offboard",
+    facts: [
+      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
+      { label: "Years", value: "2026" },
+      { label: "Team", value: "Six-person startup" },
+    ],
+    imageMarks: [],
+  },
+  {
+    /* Plan 052. Written as built, at Louie's request (2026-11-23). Leave out
+       ban conditions, limits, intervals and probe results: see the comment
+       at the top of content/work/lumo-sentry.mdx. */
+    slug: "lumo-sentry",
+    name: "LUMO Sentry",
+    blurb: "Two people were Offboard's whole security team, and a script made bot accounts that nobody noticed. I built a sentry: plain rules watch sign-ups, sign-ins and the text LUMO reads, AI reads only what they flag, and it acts alone only on what one click undoes.",
+    icon: { src: "/work/lumo-sentry/face.webp", width: 512, height: 512 },
+    title: "LUMO Sentry Security Agent",
+    tags: ["AI security", "Agent guardrails", "Product judgment"],
+    href: "/work/lumo-sentry",
+    summary: "A security agent for a two-person team. Plain rules watch around the clock, AI reads only flagged cases on $25 a month, and the sentry acts alone only on what one click undoes.",
+    image: "/work/lumo-sentry/hero.webp",
+    imageAlt: "A diagram titled How LUMO Sentry answers an attack, with the green LUMO Sentry face. Four steps from left to right. 01 Watch: plain rules read sign-ups, sign-ins and the outside text LUMO reads, around the clock, at no AI cost. 02 Decide: AI reads only what the rules flag, a second read on a short excerpt; AI spend stops at $25 a month, and at the cap the rules decide alone. 03 Act or alert: the sentry acts alone only on what one click undoes, banning a new, empty bot account, blocking a throwaway email domain, or blocking one address at sign-up; everything else is an email to staff. 04 Undo: every action can be undone, and one email says what it did and how to undo it, shown as two rows with Undo buttons. Below, a band: every Monday the red team attacks our own app with two test accounts; each probe reports Held, or Broken, which sends an urgent email.",
+    imageCaption: "How the sentry answers an attack, from the first rule to the undo. A diagram drawn for this page from Offboard’s plans, not a product screen.",
+    imageWidth: 2000, imageHeight: 1200,
+    imageFrame: "none",
+    role: "Founding Product Designer & AI Systems Lead",
+    scope: "Security strategy, the rules for what an agent may do alone, AI input safety, and the red team",
+    status: "Running, staff only",
+    result: "The first bot case is replayed every week as a drill and ends in a ban with no person in the loop. Every action has an undo.",
+    brief: {
+      problem: "Two people were the whole security team. On November 21, 2026, a script made two bot accounts, and nothing flagged it. LUMO and the connectors also read text that outsiders wrote, and nothing checked it.",
+      did: "I built a sentry with a short list of powers: plain rules watch around the clock, AI reads only flagged cases under a $25 monthly cap, outside text reaches LUMO as data, and the sentry acts alone only on what one click undoes. Every Monday it attacks our own app with test accounts.",
+      result: "Each area runs in watch mode before it may act, and a person reads a week of what it would have done. The November 21 case is replayed every week and ends in a ban with no person in the loop.",
     },
     featured: true,
     plate: "offboard",
