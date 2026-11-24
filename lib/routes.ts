@@ -15,7 +15,7 @@ export const ROUTES = [
   "/work/ck12-analytics",
   "/work/offboard",
   "/work/lumo",
-  "/work/lumo-evals",
+  "/work/lumo-bench",
   "/work/lumo-sentry",
   "/work/flexi",
   "/ai-systems",
@@ -69,7 +69,7 @@ export const LUMO_ANCHORS = [
   { id: "learnings", label: "Learnings" },
 ] as const satisfies readonly Anchor[];
 
-export const LUMO_EVALS_ANCHORS = [
+export const LUMO_BENCH_ANCHORS = [
   { id: "context", label: "Context" },
   { id: "decision-bench", label: "A bench, not training" },
   { id: "decision-models", label: "Model swaps" },
@@ -151,7 +151,7 @@ export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
   "/experiments/transfersight": TRANSFERSIGHT_ANCHORS,
   "/work/offboard": OFFBOARD_ANCHORS,
   "/work/lumo": LUMO_ANCHORS,
-  "/work/lumo-evals": LUMO_EVALS_ANCHORS,
+  "/work/lumo-bench": LUMO_BENCH_ANCHORS,
   "/work/lumo-sentry": LUMO_SENTRY_ANCHORS,
   "/work/flexi": FLEXI_ANCHORS,
 };

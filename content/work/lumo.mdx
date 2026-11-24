@@ -68,7 +68,7 @@ The bet was written down before the build: a target for members asking from the 
 - **Money is one switch.** One setting, "Let LUMO use my money details", controls every money fact LUMO reads: runway, benefits, target salary, and offer terms. With it off, LUMO sees only the company and title of each offer.
 - **Outside agents never see offers.** A database rule returns no offer rows to a connected AI agent.
 - **Support answers come from the Help page.** LUMO links the page where the person acts. It never claims to cancel, refund, or change an email address, and never promises a refund.
-- **A crisis turn gets a crisis answer.** One required test case checks that LUMO does not reach for the person's interview schedule after a crisis statement. That case later kept a cheaper model out of production (see [LUMO Bench](/work/lumo-evals#decision-models)).
+- **A crisis turn gets a crisis answer.** One required test case checks that LUMO does not reach for the person's interview schedule after a crisis statement. That case later kept a cheaper model out of production (see [LUMO Bench](/work/lumo-bench#decision-models)).
 
 <SystemDiagram title="Try it: the money switch" description="One setting, Let LUMO use my money details, controls every money fact LUMO reads: runway, weekly unemployment benefit, target salary range, and offer terms. Turn it off and LUMO keeps only each offer's company and title. Connected AI agents never read offers.">
   <MoneySwitch />

@@ -1264,3 +1264,21 @@ LUMO Sentry.
   evidence entry is tagged "authorization", not "access control", so it
   does not outrank `offboard-hitl-actions` for the Offboard control
   question.
+
+### LUMO Bench moves to /work/lumo-bench, and the family strip, November 23, 2026
+
+Plan 052, step 1.
+
+- **New address.** The Bench case study is now `/work/lumo-bench`
+  (`app/work/lumo-bench/`, `content/work/lumo-bench.mdx`), and its images
+  moved to `public/work/lumo-bench/`. `next.config.ts` sends
+  `/work/lumo-evals` and everything under it to the new address with a
+  permanent (308) redirect, so shared links, section links and old image
+  links keep working. The title stays "LUMO Bench & Evals System" until
+  the Bench updates (step 5).
+- **The family strip.** Each LUMO case study shows the three LUMO faces
+  and names under the lead, the current page marked "this page" and the
+  other two linked (`components/portfolio/family-strip.tsx`). It is the
+  first place `WorkProject.icon` renders. A project joins with
+  `family: "lumo"` in `projects.ts`; a fourth sub-brand is one entry.
+  Icons show at 40px, the smallest size where a badge reads.

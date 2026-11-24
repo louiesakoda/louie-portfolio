@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_EVALS_ANCHORS, LUMO_SENTRY_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
+import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_BENCH_ANCHORS, LUMO_SENTRY_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
 
 /**
  * Case studies (spec §13, §14, §25, §26, §34).
@@ -22,7 +22,7 @@ const STUDIES = [
     title: "Offboard Job Search Platform",
   },
   { name: "LUMO Career Agent", path: "/work/lumo", anchors: LUMO_ANCHORS, title: "LUMO Career Agent" },
-  { name: "LUMO Bench & Evals System", path: "/work/lumo-evals", anchors: LUMO_EVALS_ANCHORS, title: "LUMO Bench & Evals System" },
+  { name: "LUMO Bench & Evals System", path: "/work/lumo-bench", anchors: LUMO_BENCH_ANCHORS, title: "LUMO Bench & Evals System" },
   { name: "LUMO Sentry Security Agent", path: "/work/lumo-sentry", anchors: LUMO_SENTRY_ANCHORS, title: "LUMO Sentry Security Agent" },
   {
     name: "CK-12 Flexi AI Tutor",
@@ -302,11 +302,41 @@ test.describe("LUMO graphics", () => {
 
   test("the bench graphics plot every case and say so in text", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/work/lumo-evals");
+    await page.goto("/work/lumo-bench");
     const runs = page.locator("figure", { hasText: "Four runs, same code" });
     await expect(runs.locator("[title$='passed'], [title$='missed']")).toHaveCount(4 * 32);
     await expect(runs.getByText("Run 3: 30 of 32 passed, missed L16 and W2.", { exact: false })).toHaveCount(1);
     const hard = page.locator("figure", { hasText: "No room to measure a gain" });
     await expect(hard.locator("[title$='passed'], [title$='missed']")).toHaveCount(2 * 31);
+  });
+});
+
+test.describe("the LUMO family", () => {
+  const family = ["/work/lumo", "/work/lumo-bench", "/work/lumo-sentry"];
+
+  for (const path of family) {
+    test(`${path} links to its two siblings and marks itself`, async ({ page }) => {
+      await page.goto(path);
+      const strip = page.getByRole("navigation", { name: "The LUMO family" });
+      await expect(strip.locator("img")).toHaveCount(3);
+      await expect(strip.locator('[aria-current="page"]')).toHaveCount(1);
+      const links = await strip.getByRole("link").evaluateAll((els) => els.map((el) => el.getAttribute("href")));
+      expect(links).toEqual(family.filter((p) => p !== path));
+    });
+  }
+
+  test("a page outside the family has no strip", async ({ page }) => {
+    await page.goto("/work/offboard");
+    await expect(page.getByRole("navigation", { name: /family/ })).toHaveCount(0);
+  });
+
+  test("the old Bench address moves to the new one and keeps the section", async ({ page }) => {
+    const response = await page.request.get("/work/lumo-evals", { maxRedirects: 0 });
+    expect(response.status()).toBe(308);
+    expect(response.headers()["location"]).toBe("/work/lumo-bench");
+    await page.goto("/work/lumo-evals#decision-models");
+    await expect(page).toHaveURL(/\/work\/lumo-bench#decision-models$/);
+    const image = await page.request.get("/work/lumo-evals/bench.webp");
+    expect(image.status()).toBe(200);
   });
 });
