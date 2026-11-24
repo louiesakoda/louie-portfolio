@@ -15,7 +15,7 @@ test("homepage stacks the work, then my own projects, then where I've worked", a
   const featured = page.getByTestId("featured-work");
   await expect(featured.getByRole("heading", { level: 2, name: "Work I’m proud of" })).toBeVisible();
   const destinations = await featured.locator("article h3 a").evaluateAll((els) => els.map((el) => el.getAttribute("href")));
-  expect(destinations).toEqual(["/work/offboard", "/work/lumo", "/work/lumo-bench", "/work/lumo-sentry", "/work/ck12-analytics", "/work/flexi"]);
+  expect(destinations).toEqual(["/work/offboard", "/work/lumo", "/work/lumo-bench", "/work/lumo-sentry", "/work/lumo-ghost-check", "/work/ck12-analytics", "/work/flexi"]);
   // Each row is a short paragraph beside the project's name and years.
   const first = featured.locator("article").first();
   await expect(first.getByText("People in a career transition rebuild the same context", { exact: false })).toBeVisible();
@@ -31,7 +31,7 @@ test("hovering a project shows its screenshot in the left column", async ({ page
   test.skip(isMobile, "touch screens have no hover");
   await page.goto("/");
   const frames = page.locator(".preview-frame");
-  await expect(frames).toHaveCount(9);
+  await expect(frames).toHaveCount(10);
   await expect(page.locator(".preview-frame[data-on]")).toHaveCount(0);
   await page.getByTestId("featured-work").locator("article").nth(2).hover();
   await expect(page.locator(".preview-frame[data-on]")).toHaveCount(1);

@@ -1304,3 +1304,33 @@ repository (`origin/main` `1e728a422`).
   November 23) and `grader.webp`. Sources:
   `scripts/lumo-charts/bench-*.html`.
 - **Ask Louie.** Four evidence entries for the new facts.
+
+### LUMO Ghost Check, November 23, 2026
+
+Plan 053 (`plans/053-lumo-ghost-check.md`). A fourth page in the LUMO
+family, for Offboard's ghost job checker. Louie approved every fact and
+default in `plans/053-ghost-facts.md`, which names each source in
+Offboard's repository (`origin/main` `1e728a422`).
+
+- **Page.** `/work/lumo-ghost-check`: context, five decisions
+  (cross-posting, signals that timed out, the summary filter, no gate, the
+  stop line), "After the check", outcomes and a reflection. The family
+  strip and the homepage list pick it up from `projects.ts`.
+- **Left out.** Real usage numbers, the public cap and limits, the
+  employer in the 2026-08-15 report, and the browser extension until its
+  review on 2026-12-05.
+- **One wording change from the approved row.** Row D1 said five signals
+  "never ran". The source says the duplicate search timed out on 35 of the
+  last 40 checks. The page says that, and names the closed-posting probe
+  (27 of 40) as a sixth signal.
+- **Images.** Four charts in the shared LUMO chart frame with a coral
+  accent (`scripts/lumo-charts/ghost-*.html`). The planned "one engine,
+  every place" chart is a band in the hero; the fourth chart shows the
+  summary filter instead. The two standalone ghost screenshots moved from
+  the Offboard page, which now links here. New product screenshots are a
+  `TODO(asset)`.
+- **Icon.** A coral face with a small ghost in a magnifying glass, round 1
+  draft 3 of 4 from the ElevenLabs flow "LUMO sub-brand icons" (3,828
+  credits, plus 50 for background removal). A working pick: Louie
+  confirms or picks another from `plans/053-ghost-icon-drafts.png`.
+- **Ask Louie.** Seven evidence entries and three page questions.

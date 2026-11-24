@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_BENCH_ANCHORS, LUMO_SENTRY_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
+import { OFFBOARD_ANCHORS, LUMO_ANCHORS, LUMO_BENCH_ANCHORS, LUMO_SENTRY_ANCHORS, LUMO_GHOST_CHECK_ANCHORS, FLEXI_ANCHORS, ANALYTICS_ANCHORS, NEURON_ANCHORS, MOTIF_ANCHORS, TRANSFERSIGHT_ANCHORS } from "../lib/routes";
 
 /**
  * Case studies (spec §13, §14, §25, §26, §34).
@@ -24,6 +24,7 @@ const STUDIES = [
   { name: "LUMO Career Agent", path: "/work/lumo", anchors: LUMO_ANCHORS, title: "LUMO Career Agent" },
   { name: "LUMO Bench & Evals System", path: "/work/lumo-bench", anchors: LUMO_BENCH_ANCHORS, title: "LUMO Bench & Evals System" },
   { name: "LUMO Sentry Security Agent", path: "/work/lumo-sentry", anchors: LUMO_SENTRY_ANCHORS, title: "LUMO Sentry Security Agent" },
+  { name: "LUMO Ghost Check", path: "/work/lumo-ghost-check", anchors: LUMO_GHOST_CHECK_ANCHORS, title: "LUMO Ghost Check" },
   {
     name: "CK-12 Flexi AI Tutor",
     path: "/work/flexi",
@@ -312,13 +313,13 @@ test.describe("LUMO graphics", () => {
 });
 
 test.describe("the LUMO family", () => {
-  const family = ["/work/lumo", "/work/lumo-bench", "/work/lumo-sentry"];
+  const family = ["/work/lumo", "/work/lumo-bench", "/work/lumo-sentry", "/work/lumo-ghost-check"];
 
   for (const path of family) {
-    test(`${path} links to its two siblings and marks itself`, async ({ page }) => {
+    test(`${path} links to its siblings and marks itself`, async ({ page }) => {
       await page.goto(path);
       const strip = page.getByRole("navigation", { name: "The LUMO family" });
-      await expect(strip.locator("img")).toHaveCount(3);
+      await expect(strip.locator("img")).toHaveCount(4);
       await expect(strip.locator('[aria-current="page"]')).toHaveCount(1);
       const links = await strip.getByRole("link").evaluateAll((els) => els.map((el) => el.getAttribute("href")));
       expect(links).toEqual(family.filter((p) => p !== path));

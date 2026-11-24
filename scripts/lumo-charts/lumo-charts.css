@@ -4,8 +4,8 @@
  * its sub-brand accent. These are drawn images, not site UI, so the colors
  * live here rather than in app/globals.css.
  *
- * Accents (Louie, 2026-11-23): Bench yellow, Sentry green. LUMO keeps its
- * blue and lilac.
+ * Accents (Louie, 2026-11-23): Bench yellow, Sentry green, Ghost Check
+ * coral (Plan 053). LUMO keeps its blue and lilac.
  */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@500&display=block");
 
@@ -25,6 +25,11 @@
   --bench: #f5c84c;
   --bench-soft: rgba(245, 200, 76, 0.09);
   --bench-line: rgba(245, 200, 76, 0.45);
+  --ghost: #ff8f7d;
+  --ghost-soft: rgba(255, 143, 125, 0.1);
+  --ghost-line: rgba(255, 143, 125, 0.45);
+  /* Ghost Check charts use coral as the brand, so a fault is amber there. */
+  --caution: #e9b44c;
 
   --display: "Inter", system-ui, sans-serif;
   --mono: "Geist Mono", ui-monospace, monospace;

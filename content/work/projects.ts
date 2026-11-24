@@ -4,7 +4,7 @@ import type { CaseStudyBriefContent } from "@/components/portfolio/case-study-br
 
 /** Canonical editorial metadata. Claims and assets: plans/portfolio-strategy/. */
 export type WorkProject = {
-  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-bench" | "lumo-sentry" | "flexi";
+  slug: "ck12-analytics" | "offboard" | "lumo" | "lumo-bench" | "lumo-sentry" | "lumo-ghost-check" | "flexi";
   name: string;
   /** The name in the homepage list, when it differs from `name`. */
   shortName?: string;
@@ -174,6 +174,43 @@ export const workProjects: readonly WorkProject[] = [
       problem: "Two people were the whole security team. On November 21, 2026, a script made two bot accounts, and nothing flagged it. LUMO and the connectors also read text that outsiders wrote, and nothing checked it.",
       did: "I built a sentry with a short list of powers: plain rules watch around the clock, AI reads only flagged cases under a $25 monthly cap, outside text reaches LUMO as data, and the sentry acts alone only on what one click undoes. Every Monday it attacks our own app with test accounts.",
       result: "Each area runs in watch mode before it may act, and a person reads a week of what it would have done. The November 21 case is replayed every week and ends in a ban with no person in the loop.",
+    },
+    featured: true,
+    plate: "offboard",
+    facts: [
+      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
+      { label: "Years", value: "2026" },
+      { label: "Team", value: "Six-person startup" },
+    ],
+    imageMarks: [],
+  },
+  {
+    /* Plan 053. Every fact is a row in plans/053-ghost-facts.md, approved by
+       Louie on 2026-11-23. Leave out usage numbers, the public cap and
+       limits, and the employer in the 2026-08-15 report: see the comment at
+       the top of content/work/lumo-ghost-check.mdx. */
+    slug: "lumo-ghost-check",
+    family: "lumo",
+    name: "LUMO Ghost Check",
+    blurb: "People skip a job, or spend an evening on it, because of this score. The first version punished normal cross-posting, hid checks that timed out, and once let its own summary contradict it. I rebuilt the scoring, made every signal run, and tied the words to the number.",
+    icon: { src: "/work/lumo-ghost-check/face.webp", width: 512, height: 512 },
+    title: "LUMO Ghost Check",
+    tags: ["Trust in AI", "Scoring design", "Product judgment"],
+    href: "/work/lumo-ghost-check",
+    summary: "Paste a job link and get a ghost-risk score, a plain verdict, the warning signs and one next step. The work was making the score deserve trust: what counts as evidence, whether each check ran, and whether the words agree with the number.",
+    image: "/work/lumo-ghost-check/hero.webp",
+    imageAlt: "A diagram titled From a job link to a score a person can act on, with the coral LUMO Ghost Check face. Four steps from left to right. 01 Paste: one job link, with no login and no email on the public page. 02 Check: 15 signals; 13 can add points and 2 are shown and add nothing; three are named, closed in the applicant system, apply link broken and frequent reposting, with 12 more. 03 Score: ghost risk from 0 to 100, where higher means more likely a ghost job; a bar shows three bands, Looks Legit from 0 to 30, Check Carefully from 31 to 60 and Likely Ghost from 61 to 100, with a line marked stop at 70; at 70 a packet build stops, and from 61 to 69 it is a warning and the person may go on. 04 Act: a plain result, with a verdict in words, the warning signs with points, and one next step. Below, a band: one engine, six places: its own page in the app, the public page, every packet build, LUMO's chat, LUMO in Slack, and the Claude and ChatGPT connectors.",
+    imageCaption: "From a pasted link to a result. A diagram drawn for this page from Offboard’s scoring code, not a product screen.",
+    imageWidth: 2000, imageHeight: 1200,
+    imageFrame: "none",
+    role: "Founding Product Designer & AI Systems Lead",
+    scope: "Scoring design, signal reliability, AI output checks, and the public checker",
+    status: "Live in Offboard and on a public page",
+    result: "All 15 signals run, one module sets the bands in every place, and a filter keeps the AI summary in line with the score.",
+    brief: {
+      problem: "People act on the ghost score, and the first version could not be trusted. A real job posted on three boards could collect 60 to 90 points. The search behind five signals timed out on 35 of the last 40 checks. One live report showed a score of 31 beside a summary that said “high chance of being a ghost job”.",
+      did: "I rebuilt the scoring so cross-posting and missing data are not evidence, cut the slow calls so every signal runs, put the band cutoffs in one module, and added a filter that rejects a summary that contradicts its band. The public checker asks for no login and no email.",
+      result: "All 15 signals ran on live checks after the fix, and the report shows the status of each one. A packet build stops at a score of 70; from 61 to 69 the person decides. Usage numbers stay private.",
     },
     featured: true,
     plate: "offboard",
