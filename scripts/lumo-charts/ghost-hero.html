@@ -1,0 +1,120 @@
+<!doctype html>
+<!--
+  LUMO Ghost Check hero (Plan 053, facts A1, A4, A5, F1, F2, approved by Louie
+  2026-11-23). Rendered to public/work/lumo-ghost-check/hero.webp by render.cjs.
+  Source: Offboard supabase/functions/_shared/ghost/scoring.ts, scoreBands.ts
+  and build-job-packet/pipeline.ts, read at origin/main 1e728a422.
+  The alt text in content/work/projects.ts restates every label here.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--ghost); --brand-soft: var(--ghost-soft); --brand-line: var(--ghost-line); }
+
+  .flow { display: grid; grid-template-columns: 0.8fr 1.1fr 1.5fr 0.9fr; gap: 40px; margin-top: 60px; }
+  .step { position: relative; border-top: 2px solid var(--line); padding-top: 28px; }
+  .step.lead { border-top-color: var(--brand); }
+  .step + .step::before {
+    content: ""; position: absolute; left: -32px; top: -9px;
+    width: 16px; height: 16px; border-right: 2px solid var(--quiet); border-top: 2px solid var(--quiet);
+    transform: rotate(45deg); background: var(--canvas);
+  }
+  .step h2 { margin: 14px 0 0; font: 700 38px/1.1 var(--display); letter-spacing: -0.02em; }
+  .step p { margin: 14px 0 0; font: 400 23px/1.4 var(--display); color: var(--muted); }
+
+  .field { margin-top: 26px; padding: 16px 18px; border: 1.5px solid var(--line); border-radius: 14px; font: 500 20px/1 var(--mono); color: var(--quiet); }
+
+  .chips { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .chip { display: inline-flex; align-items: center; gap: 12px; padding: 11px 16px; border: 1.5px solid var(--line); border-radius: 12px; font: 500 21px/1 var(--display); width: fit-content; }
+  .chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--brand); }
+  .chip.more { border-style: dashed; color: var(--muted); }
+
+  .gauge { position: relative; margin-top: 70px; }
+  .zones { display: grid; grid-template-columns: 30fr 30fr 40fr; gap: 4px; height: 44px; border-radius: 12px; overflow: hidden; }
+  .zones .z1 { background: var(--track); }
+  .zones .z2 { background: var(--brand-soft); border: 1.5px solid var(--brand-line); }
+  .zones .z3 { background: var(--brand); }
+  .names { display: grid; grid-template-columns: 30fr 30fr 40fr; gap: 4px; margin-top: 14px; }
+  .names div { font: 600 20px/1.2 var(--display); white-space: nowrap; }
+  .names span { display: block; margin-top: 8px; font: 500 18px/1 var(--mono); color: var(--quiet); }
+  .stop { position: absolute; left: 70%; top: -40px; width: 0; height: 92px; border-left: 3px solid var(--ink); }
+  .stop b { position: absolute; left: 12px; top: 0; font: 500 18px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; color: var(--ink); }
+  .under { margin-top: 20px; font: 400 22px/1.4 var(--display); color: var(--muted); }
+
+  .result { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+  .result div { padding: 14px 18px; border: 1.5px solid var(--line); border-radius: 14px; font: 500 21px/1.25 var(--display); }
+
+  .band { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 40px; margin-top: 60px; padding: 28px 36px; border-radius: 20px; background: var(--raised); }
+  .band .k { font: 500 20px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+  .places { display: flex; flex-wrap: wrap; gap: 12px; }
+  .places span { padding: 12px 18px; border-radius: 999px; border: 1.5px solid var(--line); font: 500 21px/1 var(--display); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-ghost-check/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Ghost Check · Offboard · 2026</div>
+      <h1>From a job link to a score a person can act on</h1>
+    </div>
+  </header>
+
+  <section class="flow">
+    <div class="step lead">
+      <div class="num">01 · Paste</div>
+      <h2>One job link</h2>
+      <p>No login and no email on the public page.</p>
+      <div class="field">https://…</div>
+    </div>
+
+    <div class="step">
+      <div class="num">02 · Check</div>
+      <h2>15 signals</h2>
+      <p>13 can add points. 2 are shown and add nothing.</p>
+      <div class="chips">
+        <span class="chip"><i></i>Closed in the applicant system</span>
+        <span class="chip"><i></i>Apply link broken</span>
+        <span class="chip"><i></i>Frequent reposting</span>
+        <span class="chip more">12 more</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">03 · Score</div>
+      <h2>Ghost risk, 0 to 100</h2>
+      <p>Higher means more likely a ghost job.</p>
+      <div class="gauge">
+        <div class="stop"><b>Stop at 70</b></div>
+        <div class="zones"><div class="z1"></div><div class="z2"></div><div class="z3"></div></div>
+        <div class="names">
+          <div>Looks Legit<span>0 to 30</span></div>
+          <div>Check Carefully<span>31 to 60</span></div>
+          <div>Likely Ghost<span>61 to 100</span></div>
+        </div>
+      </div>
+      <div class="under">At 70 a packet build stops. From 61 to 69 it is a warning, and the person may go on.</div>
+    </div>
+
+    <div class="step">
+      <div class="num">04 · Act</div>
+      <h2>A plain result</h2>
+      <div class="result">
+        <div>A verdict in words</div>
+        <div>The warning signs, with points</div>
+        <div>One next step</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="k">One engine, six places</div>
+    <div class="places">
+      <span>Its own page in the app</span><span>The public page</span><span>Every packet build</span><span>LUMO’s chat</span><span>LUMO in Slack</span><span>Claude and ChatGPT connectors</span>
+    </div>
+  </section>
+</main>
+</body>
+</html>

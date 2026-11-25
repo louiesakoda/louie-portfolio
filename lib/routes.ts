@@ -17,6 +17,7 @@ export const ROUTES = [
   "/work/lumo",
   "/work/lumo-bench",
   "/work/lumo-sentry",
+  "/work/lumo-ghost-check",
   "/work/flexi",
   "/ai-systems",
   "/experiments",
@@ -146,6 +147,18 @@ export const LUMO_SENTRY_ANCHORS = [
   { id: "learnings", label: "Learnings" },
 ] as const satisfies readonly Anchor[];
 
+export const LUMO_GHOST_CHECK_ANCHORS = [
+  { id: "context", label: "Context" },
+  { id: "decision-syndication", label: "Cross-posting is not ghosting" },
+  { id: "decision-signals", label: "Every signal runs" },
+  { id: "decision-summary", label: "Words match the number" },
+  { id: "decision-gate", label: "No gate" },
+  { id: "decision-stop", label: "Warn, then stop" },
+  { id: "after", label: "After the check" },
+  { id: "outcomes", label: "Outcomes" },
+  { id: "learnings", label: "Learnings" },
+] as const satisfies readonly Anchor[];
+
 export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
   "/work/ck12-analytics": ANALYTICS_ANCHORS,
   "/experiments/neuron-shift": NEURON_ANCHORS,
@@ -155,6 +168,7 @@ export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
   "/work/lumo": LUMO_ANCHORS,
   "/work/lumo-bench": LUMO_BENCH_ANCHORS,
   "/work/lumo-sentry": LUMO_SENTRY_ANCHORS,
+  "/work/lumo-ghost-check": LUMO_GHOST_CHECK_ANCHORS,
   "/work/flexi": FLEXI_ANCHORS,
 };
 

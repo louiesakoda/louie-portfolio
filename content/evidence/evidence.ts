@@ -855,6 +855,122 @@ export const evidence: EvidenceItem[] = [
     evidenceType: "outcome",
   },
 
+  // ------------------------------------------------- LUMO Ghost Check (Plan 053)
+  // Restates the page only. The page leaves out usage numbers, the public
+  // cap and limits, and the employer in the 2026-08-15 report; so do these.
+  {
+    id: "lumo-ghost-context",
+    project: "offboard",
+    title: "What LUMO Ghost Check is",
+    summary:
+      "The ghost check takes a job link and returns a ghost-risk score from 0 to 100, a plain verdict, the warning signs with their points, and one next step.",
+    detail:
+      "A higher score means the posting is more likely a ghost job. It first shipped inside Offboard in January 2026, and a public version with no login went live on August 14, 2026. One engine runs every check in six places: its own page in the app, the public page, every packet build, LUMO's chat, LUMO in Slack, and the Claude and ChatGPT connectors. The score is the sum of 15 signals; thirteen can add points and two are shown for information only. Louie made the design calls and built it with AI coding agents in the loop.",
+    route: "/work/lumo-ghost-check",
+    anchor: "context",
+    tags: ["ghost jobs", "ghost check", "job posting", "score", "lumo ghost check"],
+    skills: ["AI Product Design", "Product Strategy"],
+    evidenceType: "product",
+  },
+  {
+    id: "lumo-ghost-syndication",
+    project: "offboard",
+    title: "Cross-posted jobs scored as ghost jobs, and the fix",
+    summary:
+      "The first ghost scorer counted normal cross-posting as evidence: a real job posted on LinkedIn, Indeed and the company's own site could collect 60 to 90 points.",
+    detail:
+      "Each job board gives the same job its own ID and its own date, so multiple IDs, frequent reposting and conflicting dates all fired on the same harmless thing, and missing data added points too. The fix in July 2026: duplicate IDs and reposting count only on the same source, reposting's maximum dropped from 35 points to 25, a date conflict needs more than 21 days and cannot fire with reposting, and missing data adds nothing. High confidence needs one of five evidence-bearing signals. Louie moved the scoring out of a 2,247-line function with no tests into a pure module with tests first.",
+    route: "/work/lumo-ghost-check",
+    anchor: "decision-syndication",
+    tags: ["ghost jobs", "cross-posted", "cross-posting", "syndication", "false positives", "scoring", "lumo ghost check"],
+    skills: ["Systems Design", "Product Judgment"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-ghost-signals",
+    project: "offboard",
+    title: "Ghost check signals that timed out, and the fix",
+    summary:
+      "In August 2026 the duplicate-posting search timed out on 35 of the last 40 checks, which took five of the 15 ghost signals with it; the closed-posting probe timed out on 27 of 40.",
+    detail:
+      "Both calls asked the scraping service for slow work inside outer budgets of 7 and 6 seconds. The fix asked for less: the duplicate search reads titles and descriptions only, at about 2 credits where it cost about 42. Live runs then showed the closed-posting probe needed 20 seconds. After that all 15 signals ran, and the report page shows the status of each check. A crashed check is now marked failed, not left pending.",
+    route: "/work/lumo-ghost-check",
+    anchor: "decision-signals",
+    tags: ["reliability", "timeouts", "signals", "ghost check", "lumo ghost check"],
+    skills: ["Systems Design"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-ghost-summary-guard",
+    project: "offboard",
+    title: "The ghost check's summary cannot contradict its score",
+    summary:
+      "A live report showed a ghost score of 31, 'Check Carefully', with an AI summary that said 'high chance of being a ghost job'. A filter now keeps the ghost check summary in line with the score.",
+    detail:
+      "The summary prompt had nothing that tied it to the band, and six places in the product each set their own bands, so a score of 62 read 'Likely Ghost' in one place and 'Medium' in another. Louie kept the direction of the score, put the cutoffs in one module with a test over every score from 0 to 100, and added a filter that reads the summary after it is written: if the words claim more risk or more safety than the band, the product shows a fixed sentence for that band. The lesson: telling a model the verdict in the prompt does not ground it; check the output in code. The filter passed 24 written summaries with no wrong rejection; its rate on real summaries was never measured.",
+    route: "/work/lumo-ghost-check",
+    anchor: "decision-summary",
+    tags: ["ai grounding", "summary", "score", "guardrails", "post-filter", "ghost check", "lumo ghost check"],
+    skills: ["AI Safety", "AI Product Design"],
+    evidenceType: "technical",
+  },
+  {
+    id: "lumo-ghost-no-gate",
+    project: "offboard",
+    title: "The public ghost checker asks for no email",
+    summary:
+      "The public ghost checker asks for nothing before it runs: no login and no email. One link field, then the full report.",
+    detail:
+      "The first recommendation was to ask for an email before the check. Louie rejected it: a gate puts friction in front of a visitor who has no reason yet to trust the tool. Repeat links cost once, because the 7-day result cache is shared by every visitor. A shared report is a page of its own and leaves out the link the person pasted. At the review, the email ask after the result had missed its target and was retired as the page's goal; the page's job is traffic and trust.",
+    route: "/work/lumo-ghost-check",
+    anchor: "decision-gate",
+    tags: ["public checker", "email gate", "no email", "growth", "trust", "ghost check", "lumo ghost check"],
+    skills: ["Product Strategy", "Product Judgment"],
+    evidenceType: "strategy",
+  },
+  {
+    id: "lumo-ghost-stop-line",
+    project: "offboard",
+    title: "The ghost check warns at 61 and ends a packet build at 70",
+    summary:
+      "Three bands: 0 to 30 'Looks Legit', 31 to 60 'Check Carefully', 61 and above 'Likely Ghost'. A packet build ends at 70 or above.",
+    detail:
+      "In a packet the ghost check runs before the resume and the cover letter, and at 70 or above the build ends there, before the tailored resume and the letter are written. From 61 to 69 the result is a warning and the person may go on. The check is a warning, not proof that a listing is fake.",
+    route: "/work/lumo-ghost-check",
+    anchor: "decision-stop",
+    tags: ["risk gate", "threshold", "bands", "human in the loop", "ghost check", "lumo ghost check"],
+    skills: ["Product Judgment", "AI Product Design"],
+    evidenceType: "product",
+  },
+  {
+    id: "lumo-ghost-after",
+    project: "offboard",
+    title: "After a ghost check: watch a job, and see when a posting closes",
+    summary:
+      "A visitor can ask for an email when a posting changes, and a tracked application shows when its job posting has closed.",
+    detail:
+      "One monitor runs per job link, however many people watch it. In the live test, a judged change sent one email, a retry of the same webhook sent none, and unsubscribing removed the watcher and the monitor. Since September 25, 2026, a tracked application shows 'Posting closed as of' a date; a daily job checks saved links with a free probe, at no scraping cost.",
+    route: "/work/lumo-ghost-check",
+    anchor: "after",
+    tags: ["monitoring", "watch", "closed posting", "tracker", "ghost check", "lumo ghost check"],
+    skills: ["Product Design", "Systems Design"],
+    evidenceType: "product",
+  },
+  {
+    id: "lumo-ghost-outcome",
+    project: "offboard",
+    title: "LUMO Ghost Check results",
+    summary:
+      "The ghost check is live; usage numbers stay private. Results are test and system numbers: cost per check, a model check, and 104 engine tests.",
+    detail:
+      "Cost logging on August 26, 2026 showed a public check billed about 10 to 17 scraping credits, not 1 to 2; the fix shipped the next day after a reviewer sent the work back twice. In October 2026 a newer small model passed the ghost pipeline only after a one-sentence prompt fix: 18 of 18 flags false on real requests and 18 of 18 true on positive controls. The engine has 104 tests in 12 files. One item is still owed: the band cutoffs have not been re-measured from production data.",
+    route: "/work/lumo-ghost-check",
+    anchor: "outcomes",
+    tags: ["outcome", "cost", "model check", "tests", "ghost check", "lumo ghost check"],
+    skills: ["Product Strategy", "Systems Design"],
+    evidenceType: "outcome",
+  },
+
   // ------------------------------------------------------------------- Flexi
   {
     id: "flexi-classroom-scale",

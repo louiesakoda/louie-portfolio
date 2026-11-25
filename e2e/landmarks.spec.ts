@@ -18,6 +18,7 @@ const ROUTES = [
   "/work/lumo",
   "/work/lumo-bench",
   "/work/lumo-sentry",
+  "/work/lumo-ghost-check",
   "/work/flexi",
   "/ai-systems",
   "/experiments",

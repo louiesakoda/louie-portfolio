@@ -1,0 +1,163 @@
+import { CaseStudySection } from "@/components/portfolio/case-study-section";
+import { SystemDiagram, FlowDiagram } from "@/components/portfolio/system-diagram";
+import { ArtifactFrame } from "@/components/portfolio/artifact-frame";
+
+{/*
+  Plan 053. Every fact is a row in plans/053-ghost-facts.md, approved by
+  Louie on 2026-11-23, with its source in Offboard's repository (read at
+  origin/main 1e728a422).
+
+  Left out on purpose. Do not add them:
+  - Real usage numbers: checks run, sign-ups, emails, payers, the LinkedIn
+    post's reach. Standing rule.
+  - The daily cap on public checks, the per-address limits and the internal
+    fair-use ceilings. A bot can read this page.
+  - The employer in the 2026-08-15 report.
+  - The browser extension, until its review on 2026-12-05 (row A7).
+*/}
+
+<CaseStudySection id="context" title="A number people act on" eyebrow="Context and ownership">
+
+A ghost job is a posting that nobody is hiring for: the role is filled, frozen, or left up. A person in a layoff who tailors a resume and writes a letter for one loses hours they do not have.
+
+The ghost check takes a job link and returns a ghost-risk score from 0 to 100, a plain verdict, the warning signs it found with their points, and one next step. A higher score means the posting is more likely a ghost job. The check first shipped inside [Offboard](/work/offboard) in January 2026. A public version with no login went live on August 14, 2026.
+
+One engine runs every check, so a fix lands in each place at once. It runs in six places: its own page in the app, the public page, every packet build, [LUMO](/work/lumo)'s chat, LUMO in Slack, and the Claude and ChatGPT connectors.
+
+The score is the sum of 15 signals. Thirteen can add points, each up to a set maximum. Two, a missing posting date and thin job details, are shown for information and add nothing.
+
+People act on this number. They skip a job, or they spend an evening on it. So the design problem is trust. The score must not punish a normal posting, must not hide a check that did not run, and must not be contradicted by its own summary. I made those calls and built the checker with AI coding agents in the loop.
+
+<ArtifactFrame src="/work/lumo-ghost-check/checking.webp" alt="Offboard's Check a job posting page. The intro reads: Paste a public job URL to check stale listings, broken apply flows, duplicate job IDs, and other warning signs. A card shows a ghost icon and Searching for employer reviews, step 4 of 7, with a progress bar." width={1500} height={610} caption="A check in progress: paste a job link, and it works through seven steps. A QA account, October 2026. Product screenshot." />
+
+<ArtifactFrame src="/work/lumo-ghost-check/result.webp" alt="A finished ghost check for a Head of AI Design posting at Baker Tilly. The score is 0, labelled Looks Legit. The verdict reads: This posting shows few warning signs. Safe to apply. A What To Do Next card offers Add to Application Tracker. Below, a card reads No material warning signals were detected from this posting, and a Context card shows the posting snapshot: title, company, location, date posted, ATS, and source." width={1500} height={900} caption="A finished check. The result gives a score, a plain verdict, the signals found, and one next step. A QA account, October 2026. Product screenshot." />
+
+{/* TODO(asset): product screenshots from a QA account: the public page, a shared report, and a mid-band result ("Check Carefully") with its warning signs. No real member's check. */}
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-syndication" title="A job on three boards is not three jobs" eyebrow="Decision 01">
+
+The first scorer counted normal cross-posting as ghost evidence. A real job posted on LinkedIn, Indeed and the company's own site could collect 60 to 90 points from signals that all measured the same harmless thing.
+
+- **Each board gives the job its own ID.** So "multiple IDs" fired on almost any job found on two sites.
+- **Each board shows its own date.** "Frequent reposting" read those dates as reposts, and "conflicting dates" then counted the same difference a second time.
+- **Missing data scored as evidence.** A posting with no visible date, or one our own reader got little text from, gained points. A legitimate posting could reach the top band with no real ghost signal.
+
+The fix, in July 2026:
+
+- **Same source only.** Duplicate IDs count only when they come from the same site. Reposting counts only on the same source, and its maximum dropped from 35 points to 25.
+- **No double count.** A date conflict needs a gap of more than 21 days, where it was 7, and cannot fire when reposting already did.
+- **Missing data adds nothing.** It is shown, and it does not move the score.
+- **High confidence needs evidence.** A result is labeled high confidence only when at least one of five evidence-bearing signals fired: closed in the applicant system, a broken apply link, frequent reposting, duplicate IDs, or reported layoffs.
+
+Before the change, the scoring code sat inside one 2,247-line function with no tests. I moved it into a pure module and wrote tests that pin its behavior first.
+
+<ArtifactFrame frame="none" src="/work/lumo-ghost-check/syndication.webp" width={2000} height={1200} alt="A chart titled A job on three boards is not three jobs, LUMO Ghost Check, July 2026. One real job, posted on three sites: LinkedIn, Indeed and the company's own site, each with its own ID and its own date. The first scorer could give it 60 to 90 points from signals that all measured the same harmless thing. A table compares four signals. Multiple IDs: fired on almost any job found on two sites, because each board gives the job its own ID; now it counts only when the IDs come from the same site. Frequent reposting: read the different dates on different boards as reposts; now it counts only on the same source, and its maximum dropped from 35 points to 25. Conflicting dates: counted that same date difference a second time, at a gap of 7 days; now it needs a gap of more than 21 days and cannot fire when reposting already did. Missing data: no visible date, or little text read from the page, added points; now it is shown for information and adds nothing to the score. A note reads: high confidence needs one of five signals with real evidence: closed in the applicant system, a broken apply link, frequent reposting, duplicate IDs, or reported layoffs." caption="What the first scorer read as evidence, and the rule now. A chart drawn for this page from Offboard’s plan and scoring code, not a product screen." />
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-signals" title="A check that did not run is not a pass" eyebrow="Decision 02">
+
+In August 2026 the checker advertised 15 signals, and several of them almost never ran in production. The search for duplicate postings timed out on 35 of the last 40 checks, which took five signals with it. The probe for a closed posting timed out on 27 of 40. A timeout added no points, so a silent failure looked like a clean result.
+
+- **The cause.** Both calls asked the scraping service for slow work, with up to 30 seconds a page, inside outer budgets of 7 and 6 seconds.
+- **The fix asked for less.** The duplicate search now reads titles and descriptions only: about 2 credits where the old request cost about 42, and it finishes inside its budget.
+- **Measured, then moved again.** After the fix, live runs showed the closed-posting probe still starving at 12 seconds. 20 seconds was the floor. Then all 15 signals ran.
+- **The report says what ran.** The report page shows the status of each check, so a visitor can see what ran and what timed out.
+- **A crash is a failure.** A check that crashed used to leave its row "pending" forever. Now a crash marks the row failed.
+
+<ArtifactFrame frame="none" src="/work/lumo-ghost-check/signals.webp" width={2000} height={1200} alt="A chart titled A check that did not run is not a pass, LUMO Ghost Check, August 2026. The checker advertised 15 signals. Six depended on two calls that timed out on most checks: one on 35 of the last 40, the other on 27 of 40. A grid lists the 15 signals before the fix. Five are marked timed out on 35 of 40 checks: conflicting dates, frequent reposting, only on aggregators, multiple IDs, and location varies. Closed in applicant system is marked timed out on 27 of 40. The other nine ran: apply link broken, open 45 days or more, generic description, slow to fill, layoffs or freeze reported, low offer sentiment, AI read of the posting, missing posting date, and thin job details. The fix, ask for less and wait longer: the duplicate search cost fell from about 42 scraping credits to about 2, its time budget rose from 7 seconds to 15, and the closed-posting probe's budget rose from 6 seconds to 20. After the fix, 15 of 15 signals ran on the live checks, and the report shows the status of each one." caption="Which signals timed out, and what changed. A chart drawn for this page from Offboard’s plan and its results, not a product screen." />
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-summary" title="The words cannot contradict the number" eyebrow="Decision 03">
+
+On August 15, 2026 a live report showed a score of 31, the verdict "Check Carefully", and an AI summary that opened with "high chance of being a ghost job".
+
+There were two causes. The summary prompt had nothing that tied it to the band. And six places in the product each defined the bands on their own: 30 and 60 in the app, 35 and 65 on the share page and the social image. The same score of 62 read "Likely Ghost" in one place and "Medium" in another.
+
+- **I kept the direction of the score.** Turning it into a "legitimacy score" would flip the meaning of every stored score, cached report, sent email and shared link, and it would not fix the bug.
+- **One module holds the band cutoffs.** A test checks every score from 0 to 100 against the copy the app uses.
+- **A filter reads the summary after it is written.** If the words claim more risk, or more safety, than the band supports, the product shows a fixed sentence for that band.
+
+The lesson I wrote down: telling a model the verdict in the prompt does not ground it. Check the output in code.
+
+The filter was tested on 24 written summaries with no wrong rejection. How often it fires on real summaries was never measured; I closed that as not worth the work at the current volume.
+
+<ArtifactFrame frame="none" src="/work/lumo-ghost-check/summary.webp" width={2000} height={1200} alt="A chart titled The words cannot contradict the number, LUMO Ghost Check, August 15, 2026. Left, what a live report showed: a score of 31, Check Carefully, with an AI summary that opened high chance of being a ghost job, marked the words claim more than the score. And six places each set their own bands; a score of 62 read Likely Ghost in the app, with bands at 30 and 60, and Medium on the share page and the social image, with bands at 35 and 65. Right, the fix, check the output in code: the same score of 31, Check Carefully. A filter reads the summary after it is written. Words that claim more risk, or more safety, than the band are rejected, and the report then shows the band's fixed sentence: Some warning signs detected. Proceed with caution. Marked the words match the band. One module holds the cutoffs, a test checks every score from 0 to 100 against the copy the app uses, and every place uses 31 and 61: one verdict per score." caption="The bug and the fix. The employer in the real report is left out. A chart drawn for this page from Offboard’s decision record and code, not a product screen." />
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-gate" title="No gate before the answer" eyebrow="Decision 04">
+
+The public checker asks for nothing before it runs: no login and no email. One link field, then the full report on the page.
+
+The first recommendation was to ask for an email before the check. I rejected it. A gate puts friction in front of a visitor who has no reason yet to trust the tool.
+
+- **Repeat links cost once.** The public checker runs as one system account, so the 7-day result cache is shared by every visitor: a link someone already checked comes back at once.
+- **A shared report is a page of its own.** It invites the next visitor to run a check. The shared copy leaves out the link the person pasted.
+- **What the review showed.** The email ask after the result had missed its target, and I retired it as the page's goal. The page's job is traffic and trust, not the list.
+
+<SystemDiagram title="Value first, asks after" description="Conceptual flow: a visitor pastes a link with no login and no email. A link checked in the last 7 days returns from the shared cache at once. Otherwise the engine runs. The full report shows on the page, and only then come the asks: share the report, or watch the job.">
+  <FlowDiagram stages={[
+    { node: { label: "Paste a job link" } },
+    { node: { label: "Checked in the last 7 days?" }, branch: { condition: "Yes", outcome: "The saved report, at once" } },
+    { node: { label: "The engine runs", tone: "accent" } },
+    { node: { label: "The full report on the page" } },
+    { node: { label: "Then the asks: share, or watch this job" } },
+  ]} />
+</SystemDiagram>
+
+</CaseStudySection>
+
+<CaseStudySection id="decision-stop" title="Warn at 61, stop at 70" eyebrow="Decision 05">
+
+The score has three bands: 0 to 30 "Looks Legit", 31 to 60 "Check Carefully", 61 and above "Likely Ghost".
+
+- **The check runs first.** In a packet, the ghost check runs before the resume and the cover letter. At 70 or above the build stops there, before the tailored resume and the letter are written.
+- **Below the line, the person decides.** From 61 to 69 the result is a warning and the person may go on. The check is a warning, not proof that a listing is fake.
+
+<SystemDiagram title="Where a packet build stops" description="Conceptual flow: in a packet build the ghost check runs first. A score of 70 or more stops the build before the resume and the cover letter. A score from 61 to 69 shows a warning and the person may go on. Below 61 the build continues.">
+  <FlowDiagram stages={[
+    { node: { label: "A packet build starts" } },
+    { node: { label: "Ghost check runs first", tone: "accent" } },
+    { node: { label: "Score 70 or more?" }, branch: { condition: "Yes", outcome: "The build stops here" } },
+    { node: { label: "Score 61 to 69?" }, branch: { condition: "Yes", outcome: "A warning; the person may go on" } },
+    { node: { label: "Resume and cover letter" } },
+  ]} />
+</SystemDiagram>
+
+</CaseStudySection>
+
+<CaseStudySection id="after" title="After the check" eyebrow="What came next">
+
+A score is a reading on one day. A posting can close a week later.
+
+- **Watch this job.** A visitor can ask for an email when a posting changes. One monitor runs per job link, however many people watch it. In the live test, a judged change sent one email, a retry of the same webhook sent none, and unsubscribing removed the watcher and the monitor.
+- **A closed posting shows on the tracker.** Since September 25, 2026, a tracked application shows "Posting closed as of" a date when its job posting goes away. A daily job checks saved links with a free probe, at no scraping cost.
+
+</CaseStudySection>
+
+<CaseStudySection id="outcomes" title="Live, and measured where it could fail" eyebrow="Outcome">
+
+The ghost check is live in the six places above. Usage numbers stay private. The numbers below are test and system results.
+
+- **Cost per check.** On August 26, 2026 new cost logging showed that a public check billed about 10 to 17 scraping credits, not the 1 to 2 I had assumed. Two causes: the scraper's own AI extraction duplicated a step the pipeline already ran, and a browser agent fired on 13 of 20 public runs. The fix shipped the next day. The reviewer found a defect the plan had missed and sent the work back twice before it merged.
+- **A model swap, checked first.** In October 2026 I checked a newer small model on the ghost pipeline before switching: 3 live postings, 5 stages, each recorded once and replayed twice. It passed only after a one-sentence prompt fix, for the stage that reads employer reviews. With the fix, 18 of 18 flags were false on real requests, and 18 of 18 were true on the same requests with a dated layoff and three recent ghosting reviews added. A first wording dropped 2 of 3 true signals and was rejected.
+- **Tests.** The engine has 104 tests in 12 files.
+- **Real traffic found a gap.** LinkedIn job links failed when the checker first met real traffic from LinkedIn, because the scraping service cannot render that site. It was fixed the same week.
+
+{/* TODO(content): any result Louie wants to add later, with its source. Not usage counts. */}
+
+</CaseStudySection>
+
+<CaseStudySection id="learnings" title="Most of this work does not show" eyebrow="Reflection">
+
+The result page looks much the same as it did before these decisions. They changed whether the number deserves to be believed: what counts as evidence, whether a check ran, whether the words agree with the score, and where the product stops.
+
+One item is still owed. The band cutoffs were due a re-measure from production data about two weeks after the revived signals shipped, and that has not been done.
+
+{/* TODO(content): Louie's own reflection. This draft restates rows B4 and I1 of plans/053-ghost-facts.md. */}
+
+</CaseStudySection>

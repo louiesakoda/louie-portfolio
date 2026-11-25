@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+  LUMO Ghost Check: signals that did not run (Plan 053, facts D1 to D4,
+  approved by Louie 2026-11-23). Rendered to
+  public/work/lumo-ghost-check/signals.webp by render.cjs.
+  Source: Offboard plans/210-ghost-signal-reliability.md and its row in
+  plans/README.md; labels from SIGNALS in _shared/ghost/scoring.ts; read at
+  origin/main 1e728a422.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--ghost); --brand-soft: var(--ghost-soft); --brand-line: var(--ghost-line); }
+  .lede { margin: 22px 0 0; max-width: 60em; font: 400 25px/1.4 var(--display); color: var(--muted); }
+  .cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 72px; margin-top: 44px; }
+  .k { font: 500 19px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-top: 20px; }
+  .sig { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-radius: 12px; border: 1.5px solid var(--line); font: 500 20px/1.2 var(--display); }
+  .sig em { flex: none; font: 500 15px/1 var(--mono); font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: var(--quiet); }
+  .sig.dead { border: 1.5px dashed var(--caution); color: var(--muted); }
+  .sig.dead em { color: var(--caution); }
+  .legend { display: flex; gap: 28px; margin-top: 18px; font: 400 20px/1.3 var(--display); color: var(--muted); }
+  .legend i { display: inline-block; width: 22px; height: 12px; margin-right: 10px; border-radius: 4px; border: 1.5px dashed var(--caution); vertical-align: middle; }
+
+  .fix { border-top: 2px solid var(--brand); padding-top: 24px; }
+  .row { display: grid; grid-template-columns: 1fr auto auto auto; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 2px solid var(--line); font: 400 23px/1.3 var(--display); color: var(--muted); }
+  .row b { font: 600 34px/1 var(--display); letter-spacing: -0.02em; color: var(--ink); }
+  .row .to { color: var(--quiet); font: 500 20px/1 var(--mono); }
+  .row b.now { color: var(--brand); }
+  .after { margin-top: 26px; display: flex; align-items: center; gap: 24px; }
+  .after .big { font: 700 104px/0.9 var(--display); letter-spacing: -0.04em; color: var(--brand); }
+  .after p { margin: 0; font: 400 23px/1.4 var(--display); color: var(--muted); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-ghost-check/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Ghost Check · Offboard · August 2026</div>
+      <h1>A check that did not run is not a pass</h1>
+    </div>
+  </header>
+  <p class="lede">The checker advertised 15 signals. Six depended on two calls that timed out on most checks: one on 35 of the last 40, the other on 27 of 40.</p>
+
+  <section class="cols">
+    <div>
+      <div class="k">The 15 signals, before the fix</div>
+      <div class="grid">
+        <div class="sig dead">Conflicting dates<em>35 of 40</em></div>
+        <div class="sig dead">Frequent reposting<em>35 of 40</em></div>
+        <div class="sig dead">Only on aggregators<em>35 of 40</em></div>
+        <div class="sig dead">Multiple IDs<em>35 of 40</em></div>
+        <div class="sig dead">Location varies<em>35 of 40</em></div>
+        <div class="sig dead">Closed in applicant system<em>27 of 40</em></div>
+        <div class="sig">Apply link broken</div>
+        <div class="sig">Open 45 days or more</div>
+        <div class="sig">Generic description</div>
+        <div class="sig">Slow to fill</div>
+        <div class="sig">Layoffs or freeze reported</div>
+        <div class="sig">Low offer sentiment</div>
+        <div class="sig">AI read of the posting</div>
+        <div class="sig">Missing posting date</div>
+        <div class="sig">Thin job details</div>
+      </div>
+      <div class="legend"><span><i></i>Timed out, on this many of the last 40 checks</span></div>
+    </div>
+
+    <div class="fix">
+      <div class="k">The fix: ask for less, wait longer</div>
+      <div class="row"><span>Duplicate search, cost in scraping credits</span><b>~42</b><span class="to">to</span><b class="now">~2</b></div>
+      <div class="row"><span>Duplicate search, time budget</span><b>7 s</b><span class="to">to</span><b class="now">15 s</b></div>
+      <div class="row"><span>Closed-posting probe, time budget</span><b>6 s</b><span class="to">to</span><b class="now">20 s</b></div>
+      <div class="after"><span class="big">15/15</span><p>signals ran on the live checks after the fix. The report shows the status of each one.</p></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

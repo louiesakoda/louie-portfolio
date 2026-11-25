@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/lumo": 0.9,
     "/work/lumo-bench": 0.9,
     "/work/lumo-sentry": 0.9,
+    "/work/lumo-ghost-check": 0.9,
     "/work/flexi": 0.9,
     "/ai-systems": 0.7,
     "/resume": 0.7,

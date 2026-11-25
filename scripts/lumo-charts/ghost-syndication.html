@@ -1,0 +1,74 @@
+<!doctype html>
+<!--
+  LUMO Ghost Check: cross-posting is not ghosting (Plan 053, facts C1 to C4,
+  approved by Louie 2026-11-23). Rendered to
+  public/work/lumo-ghost-check/syndication.webp by render.cjs.
+  Source: Offboard plans/054-ghost-checker-quality-and-quick-check-entry.md
+  (findings F1 to F4) and supabase/functions/_shared/ghost/scoring.ts, read at
+  origin/main 1e728a422.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--ghost); --brand-soft: var(--ghost-soft); --brand-line: var(--ghost-line); }
+  .lede { margin: 22px 0 0; max-width: 60em; font: 400 25px/1.4 var(--display); color: var(--muted); }
+  .boards { display: flex; gap: 14px; margin-top: 30px; }
+  .boards span { padding: 12px 18px; border-radius: 999px; border: 1.5px solid var(--line); font: 500 21px/1 var(--display); }
+  .boards span b { font: 500 17px/1 var(--mono); color: var(--quiet); margin-left: 10px; letter-spacing: 0.04em; }
+
+  table { width: 100%; margin-top: 40px; border-collapse: collapse; }
+  th { text-align: left; padding: 0 28px 16px 0; font: 500 19px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+  th.new { color: var(--brand); }
+  td { vertical-align: top; padding: 22px 28px 22px 0; border-top: 2px solid var(--line); font: 400 23px/1.4 var(--display); color: var(--muted); }
+  td.sig { width: 23%; font: 600 25px/1.25 var(--display); color: var(--ink); }
+  td.old { width: 38%; }
+  td.new { color: var(--ink); border-top-color: var(--brand); }
+  .foot { display: flex; gap: 18px; align-items: baseline; margin-top: 30px; padding: 22px 28px; border-radius: 16px; background: var(--raised); font: 400 23px/1.4 var(--display); color: var(--muted); }
+  .foot b { flex: none; font: 500 18px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-ghost-check/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Ghost Check · Offboard · July 2026</div>
+      <h1>A job on three boards is not three jobs</h1>
+    </div>
+  </header>
+  <p class="lede">One real job, posted on three sites. The first scorer could give it 60 to 90 points from signals that all measured the same harmless thing.</p>
+  <div class="boards">
+    <span>LinkedIn<b>own ID, own date</b></span>
+    <span>Indeed<b>own ID, own date</b></span>
+    <span>The company’s own site<b>own ID, own date</b></span>
+  </div>
+
+  <table>
+    <tr><th>Signal</th><th>How the first scorer read it</th><th class="new">The rule now</th></tr>
+    <tr>
+      <td class="sig">Multiple IDs</td>
+      <td class="old">Fired on almost any job found on two sites, because each board gives the job its own ID.</td>
+      <td class="new">Counts only when the IDs come from the same site.</td>
+    </tr>
+    <tr>
+      <td class="sig">Frequent reposting</td>
+      <td class="old">Read the different dates on different boards as reposts.</td>
+      <td class="new">Counts only on the same source. Its maximum dropped from 35 points to 25.</td>
+    </tr>
+    <tr>
+      <td class="sig">Conflicting dates</td>
+      <td class="old">Counted that same date difference a second time, at a gap of 7 days.</td>
+      <td class="new">Needs a gap of more than 21 days, and cannot fire when reposting already did.</td>
+    </tr>
+    <tr>
+      <td class="sig">Missing data</td>
+      <td class="old">No visible date, or little text read from the page, added points.</td>
+      <td class="new">Shown for information. Adds nothing to the score.</td>
+    </tr>
+  </table>
+  <div class="foot"><b>High confidence</b><span>needs one of five signals with real evidence: closed in the applicant system, a broken apply link, frequent reposting, duplicate IDs, or reported layoffs.</span></div>
+</main>
+</body>
+</html>

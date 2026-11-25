@@ -69,6 +69,15 @@ export const PAGE_QUESTIONS: readonly PageQuestions[] = [
     ],
   },
   {
+    route: "/work/lumo-ghost-check",
+    name: "LUMO Ghost Check",
+    questions: [
+      { text: "Why did cross-posted jobs score as ghost jobs?", slug: "lumo-ghost-syndication" },
+      { text: "How does the ghost check keep its summary in line with the score?", slug: "lumo-ghost-summary" },
+      { text: "Why does the public ghost checker ask for no email?", slug: "lumo-ghost-gate" },
+    ],
+  },
+  {
     route: "/work/ck12-analytics",
     name: "CK-12 Foresights",
     questions: [

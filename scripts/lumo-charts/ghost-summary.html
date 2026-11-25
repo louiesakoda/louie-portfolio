@@ -1,0 +1,82 @@
+<!doctype html>
+<!--
+  LUMO Ghost Check: the words cannot contradict the number (Plan 053, facts
+  E1 to E4, approved by Louie 2026-11-23). Rendered to
+  public/work/lumo-ghost-check/summary.webp by render.cjs.
+  Source: Offboard coach/decisions/2026-08-15-ghost-score-direction.md,
+  supabase/functions/_shared/ghost/scoreBands.ts and the plan 213 row in
+  plans/README.md, read at origin/main 1e728a422. The employer in the real
+  report is left out on purpose.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--ghost); --brand-soft: var(--ghost-soft); --brand-line: var(--ghost-line); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 52px; }
+  .col { border-top: 2px solid var(--line); padding-top: 26px; }
+  .col.new { border-top-color: var(--brand); }
+  .col h2 { margin: 0; font: 700 32px/1.15 var(--display); letter-spacing: -0.015em; }
+  .col h2 span { font-weight: 400; color: var(--muted); }
+  .col > p { margin: 12px 0 0; font: 400 23px/1.4 var(--display); color: var(--muted); }
+
+  .card { margin-top: 24px; padding: 24px 28px; border-radius: 18px; background: var(--raised); }
+  .card .top { display: flex; align-items: baseline; gap: 18px; }
+  .card .n { font: 700 72px/0.9 var(--display); letter-spacing: -0.04em; }
+  .card .v { font: 600 26px/1 var(--display); }
+  .card .s { margin-top: 18px; font: 400 23px/1.45 var(--display); color: var(--muted); }
+  .card .s q { quotes: "“" "”"; color: var(--ink); font-weight: 600; }
+  .card .s .bad { box-shadow: inset 0 -2px 0 var(--caution); }
+  .card .s .ok { color: var(--ink); font-weight: 600; background: var(--brand-soft); box-shadow: inset 0 -2px 0 var(--brand-line); }
+  .tag { display: inline-block; margin-top: 16px; font: 500 17px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+  .tag.bad { color: var(--caution); }
+  .tag.ok { color: var(--brand); }
+
+  .bands { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .bands div { display: grid; grid-template-columns: 1fr auto auto; gap: 18px; align-items: baseline; padding: 14px 18px; border: 1.5px solid var(--line); border-radius: 12px; font: 400 22px/1.2 var(--display); color: var(--muted); }
+  .bands b { font: 500 19px/1 var(--mono); color: var(--quiet); }
+  .bands strong { font: 600 22px/1 var(--display); color: var(--ink); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-ghost-check/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Ghost Check · Offboard · August 15, 2026</div>
+      <h1>The words cannot contradict the number</h1>
+    </div>
+  </header>
+
+  <section class="cols">
+    <div class="col">
+      <h2>What a live report showed</h2>
+      <div class="card">
+        <div class="top"><span class="n">31</span><span class="v">Check Carefully</span></div>
+        <div class="s">The AI summary opened: <q class="bad">high chance of being a ghost job</q></div>
+        <span class="tag bad">The words claim more than the score</span>
+      </div>
+      <p>And six places each set their own bands. A score of 62:</p>
+      <div class="bands">
+        <div><span>The app</span><b>bands at 30 and 60</b><strong>Likely Ghost</strong></div>
+        <div><span>The share page and the social image</span><b>bands at 35 and 65</b><strong>Medium</strong></div>
+      </div>
+    </div>
+
+    <div class="col new">
+      <h2>The fix <span>· check the output in code</span></h2>
+      <div class="card">
+        <div class="top"><span class="n">31</span><span class="v">Check Carefully</span></div>
+        <div class="s">A filter reads the summary after it is written. Words that claim more risk, or more safety, than the band are rejected. The report then shows the band’s fixed sentence: <span class="ok">Some warning signs detected. Proceed with caution.</span></div>
+        <span class="tag ok">The words match the band</span>
+      </div>
+      <p>One module holds the cutoffs. A test checks every score from 0 to 100 against the copy the app uses.</p>
+      <div class="bands">
+        <div><span>Every place</span><b>31 and 61</b><strong>One verdict per score</strong></div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
