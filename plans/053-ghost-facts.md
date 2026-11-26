@@ -122,3 +122,19 @@ fact only you know.
 - The employer named in the 2026-08-15 bug report.
 - A statistic on how common ghost jobs are. Offboard's repository holds no
   sourced one.
+
+## K. Added 2026-11-25 for the Socure fixes
+
+Louie said "Yes start fixes" on 2026-11-25 to a list that named these
+additions. New facts below; each has its source. Louie checks them in the
+pull request.
+
+| # | Sentence on the page | Source |
+|---|---|---|
+| K1 | Success measures: the five bars and their state. | Bars: `plans/054-*` (F1 to F4 fixed, confidence gated on evidence), `plans/210-*` (all 15 signals run), `coach/decisions/2026-08-15-ghost-score-direction.md` "Expected outcome" (one tier everywhere), `plans/README.md` row 213, comment on `GHOST_TIER_MIN` (re-measure owed) |
+| K2 | "Several times a week I read what people did in production ... From August to November 2026 I filed 96 of these reads." | 96 files in Offboard `coach/evidence/` dated 2026-08 to 2026-11 (README excluded); `coach/evidence/README.md` (file each read with its query). "Several times a week": Louie, chat, 2026-11-25 |
+| K3 | "I also run walkthroughs of the app with people over Google Meet." | Louie, chat, 2026-11-25 |
+| K4 | "People checked a job, then stopped ... a job a person checked before signing up now fills the box on their first Home screen." | `coach/evidence/2026-08-28-linkedin-spike-cohort-two-days-later.md` (words only, no counts); `plans/README.md` row 250; `documentation/product/how-this-works.md` ("The ghost-check job (plan 250)") |
+| K5 | States grid: posting gone (404 or not-found page stops before scoring), blocked page not called gone, thin details shown with no points, per-check status, LinkedIn line. | `_shared/ghost/pageAvailability.ts`; `SanitizedCheckRun` in `_shared/ghost/shareUtils.ts`; `src/components/ghost-checker/GhostJobDetailsCard.tsx`; `src/pages/GhostCheckPublic.tsx` |
+| K6 | "In review, a second AI agent found a defect ..." (replaces "The reviewer found ...") | `plans/README.md` row 242: executor branch `worktree-agent-*`, reviewed by a second agent. **Louie to confirm** the reviewer was an agent, not a person. |
+| K7 | "Who I worked with" lines on Ghost Check and Offboard: AI coding agents, a second agent reviews against a written plan, Louie previews and approves each merge. | `plans/README.md` status rows ("Reviewer re-ran every gate", "awaiting owner preview + merge", "[Louie merges]") |

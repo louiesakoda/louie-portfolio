@@ -24,7 +24,7 @@ def role(item):
     result = [KeepTogether([p(item['title'], 'role'), p(item['company']+' | '+item['period'], 'meta')])]
     result += [p('- '+line, 'bullet') for line in item['highlights']]
     return result
-story = [p('Louie Sakoda','name'),p(data['headline'],'headline'),p('San Francisco, CA | louie.sakoda@gmail.com | linkedin.com/in/louiesakoda | louiesakoda.com','meta'),p('SUMMARY','section'),p(data['summary']),p('EXPERIENCE','section')]
+story = [p('Louie Sakoda','name'),p(data['headline'],'headline'),p('San Francisco Bay Area | louie.sakoda@gmail.com | linkedin.com/in/louiesakoda | louiesakoda.com','meta'),p('SUMMARY','section'),p(data['summary']),p('EXPERIENCE','section')]
 for item in data['roles'][:2]: story += role(item)
 story += [PageBreak(),p('Louie Sakoda','headline'),p('EXPERIENCE, CONTINUED','section')]
 for item in data['roles'][2:]: story += role(item)
@@ -40,4 +40,4 @@ def footer(canvas, doc):
     canvas.setFont('Helvetica',8)
     canvas.setFillColor(colors.HexColor('#666666'))
     canvas.drawRightString(570,24,str(doc.page))
-SimpleDocTemplate(destination, pagesize=(612,792), rightMargin=42,leftMargin=42,topMargin=35,bottomMargin=35,title='Louie Sakoda | Founding Product Designer & AI Systems Lead',author='Louie Sakoda').build(story,onFirstPage=footer,onLaterPages=footer)
+SimpleDocTemplate(destination, pagesize=(612,792), rightMargin=42,leftMargin=42,topMargin=35,bottomMargin=35,title='Louie Sakoda | Senior Product Designer',author='Louie Sakoda').build(story,onFirstPage=footer,onLaterPages=footer)

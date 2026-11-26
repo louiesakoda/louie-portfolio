@@ -81,6 +81,79 @@ export const workProjects: readonly WorkProject[] = [
     imageMarks: [{ x: 57.3, y: 20, w: 13.1, h: 20, label: "The packet leads with fit" }],
   },
   {
+    /* Plan 053. Every fact is a row in plans/053-ghost-facts.md, approved by
+       Louie on 2026-11-23. Leave out usage numbers, the public cap and
+       limits, and the employer in the 2026-08-15 report: see the comment at
+       the top of content/work/lumo-ghost-check.mdx. */
+    slug: "lumo-ghost-check",
+    family: "lumo",
+    name: "LUMO Ghost Check",
+    blurb: "People skip a job, or spend an evening on it, because of this score. The first version punished normal cross-posting, hid checks that timed out, and once let its own summary contradict it. I rebuilt the scoring, made every signal run, and tied the words to the number.",
+    icon: { src: "/work/lumo-ghost-check/face.webp", width: 512, height: 512 },
+    title: "LUMO Ghost Check",
+    tags: ["Trust in AI", "Scoring design", "Product judgment"],
+    href: "/work/lumo-ghost-check",
+    summary: "Paste a job link and get a ghost-risk score, a plain verdict, the warning signs and one next step. The work was making the score deserve trust: what counts as evidence, whether each check ran, and whether the words agree with the number.",
+    image: "/work/lumo-ghost-check/hero.webp",
+    imageAlt: "A diagram titled From a job link to a score a person can act on, with the coral LUMO Ghost Check face. Four steps from left to right. 01 Paste: one job link, with no login and no email on the public page. 02 Check: 15 signals; 13 can add points and 2 are shown and add nothing; three are named, closed in the applicant system, apply link broken and frequent reposting, with 12 more. 03 Score: ghost risk from 0 to 100, where higher means more likely a ghost job; a bar shows three bands, Looks Legit from 0 to 30, Check Carefully from 31 to 60 and Likely Ghost from 61 to 100, with a line marked stop at 70; at 70 a packet build stops, and from 61 to 69 it is a warning and the person may go on. 04 Act: a plain result, with a verdict in words, the warning signs with points, and one next step. Below, a band: one engine, six places: its own page in the app, the public page, every packet build, LUMO's chat, LUMO in Slack, and the Claude and ChatGPT connectors.",
+    imageCaption: "From a pasted link to a result. A diagram drawn for this page from Offboard’s scoring code, not a product screen.",
+    imageWidth: 2000, imageHeight: 1200,
+    imageFrame: "none",
+    role: "Founding Product Designer & AI Systems Lead",
+    scope: "Scoring design, signal reliability, AI output checks, and the public checker",
+    status: "Live in Offboard and on a public page",
+    result: "All 15 signals run, one module sets the bands in every place, and a filter keeps the AI summary in line with the score.",
+    brief: {
+      problem: "People act on the ghost score, and the first version could not be trusted. A real job posted on three boards could collect 60 to 90 points. The search behind five signals timed out on 35 of the last 40 checks. One live report showed a score of 31 beside a summary that said “high chance of being a ghost job”.",
+      did: "I rebuilt the scoring so cross-posting and missing data are not evidence, cut the slow calls so every signal runs, put the band cutoffs in one module, and added a filter that rejects a summary that contradicts its band. The public checker asks for no login and no email.",
+      result: "All 15 signals ran on live checks after the fix, and the report shows the status of each one. A packet build stops at a score of 70; from 61 to 69 the person decides. Usage numbers stay private.",
+    },
+    featured: true,
+    plate: "offboard",
+    facts: [
+      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
+      { label: "Years", value: "2026" },
+      { label: "Team", value: "Six-person startup" },
+    ],
+    imageMarks: [],
+  },
+  {
+    /* Plan 052. Written as built, at Louie's request (2026-11-23). Leave out
+       ban conditions, limits, intervals and probe results: see the comment
+       at the top of content/work/lumo-sentry.mdx. */
+    slug: "lumo-sentry",
+    family: "lumo",
+    name: "LUMO Sentry",
+    blurb: "Two people were Offboard's whole security team, and a script made bot accounts that nobody noticed. I built a sentry: plain rules watch sign-ups, sign-ins and the text LUMO reads, AI reads only what they flag, and it acts alone only on what one click undoes.",
+    icon: { src: "/work/lumo-sentry/face.webp", width: 512, height: 512 },
+    title: "LUMO Sentry Security Agent",
+    tags: ["AI security", "Agent guardrails", "Product judgment"],
+    href: "/work/lumo-sentry",
+    summary: "A security agent for a two-person team. Plain rules watch around the clock, AI reads only flagged cases on $25 a month, and the sentry acts alone only on what one click undoes.",
+    image: "/work/lumo-sentry/hero.webp",
+    imageAlt: "A diagram titled How LUMO Sentry answers an attack, with the green LUMO Sentry face. Four steps from left to right. 01 Watch: plain rules read sign-ups, sign-ins and the outside text LUMO reads, around the clock, at no AI cost. 02 Decide: AI reads only what the rules flag, a second read on a short excerpt; AI spend stops at $25 a month, and at the cap the rules decide alone. 03 Act or alert: the sentry acts alone only on what one click undoes, banning a new, empty bot account, blocking a throwaway email domain, or blocking one address at sign-up; everything else is an email to staff. 04 Undo: every action can be undone, and one email says what it did and how to undo it, shown as two rows with Undo buttons. Below, a band: every Monday the red team attacks our own app with two test accounts; each probe reports Held, or Broken, which sends an urgent email.",
+    imageCaption: "How the sentry answers an attack, from the first rule to the undo. A diagram drawn for this page from Offboard’s plans, not a product screen.",
+    imageWidth: 2000, imageHeight: 1200,
+    imageFrame: "none",
+    role: "Founding Product Designer & AI Systems Lead",
+    scope: "Security strategy, the rules for what an agent may do alone, AI input safety, and the red team",
+    status: "Running, staff only",
+    result: "The first bot case is replayed every week as a drill and ends in a ban with no person in the loop. Every action has an undo.",
+    brief: {
+      problem: "Two people were the whole security team. On November 21, 2026, a script made two bot accounts, and nothing flagged it. LUMO and the connectors also read text that outsiders wrote, and nothing checked it.",
+      did: "I built a sentry with a short list of powers: plain rules watch around the clock, AI reads only flagged cases under a $25 monthly cap, outside text reaches LUMO as data, and the sentry acts alone only on what one click undoes. Every Monday it attacks our own app with test accounts.",
+      result: "Each area runs in watch mode before it may act, and a person reads a week of what it would have done. The November 21 case is replayed every week and ends in a ban with no person in the loop.",
+    },
+    featured: true,
+    plate: "offboard",
+    facts: [
+      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
+      { label: "Years", value: "2026" },
+      { label: "Team", value: "Six-person startup" },
+    ],
+    imageMarks: [],
+  },
+  {
     slug: "lumo",
     family: "lumo",
     name: "Offboard LUMO",
@@ -138,79 +211,6 @@ export const workProjects: readonly WorkProject[] = [
       problem: "Every LUMO change ended with a 45-minute check by hand, and the result was a judgment in a sprint doc. A model swap or prompt change had no regression gate, and an early product has too little data to train a model.",
       did: "I chose a bench over training: test cases with pass-or-fail criteria, a runner against the deployed assistant, a hard set built from real conversations, rules that stop the prompt from learning the test, and a check on how often the grader agrees with a careful reader.",
       result: "A cheaper GPT-6 Luna failed a required safety case, so LUMO kept its model. When LUMO passed 87% of the hard set, above the 85% line where a gain can be measured, I paused prompt tuning and fixed a memory bug first.",
-    },
-    featured: true,
-    plate: "offboard",
-    facts: [
-      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
-      { label: "Years", value: "2026" },
-      { label: "Team", value: "Six-person startup" },
-    ],
-    imageMarks: [],
-  },
-  {
-    /* Plan 052. Written as built, at Louie's request (2026-11-23). Leave out
-       ban conditions, limits, intervals and probe results: see the comment
-       at the top of content/work/lumo-sentry.mdx. */
-    slug: "lumo-sentry",
-    family: "lumo",
-    name: "LUMO Sentry",
-    blurb: "Two people were Offboard's whole security team, and a script made bot accounts that nobody noticed. I built a sentry: plain rules watch sign-ups, sign-ins and the text LUMO reads, AI reads only what they flag, and it acts alone only on what one click undoes.",
-    icon: { src: "/work/lumo-sentry/face.webp", width: 512, height: 512 },
-    title: "LUMO Sentry Security Agent",
-    tags: ["AI security", "Agent guardrails", "Product judgment"],
-    href: "/work/lumo-sentry",
-    summary: "A security agent for a two-person team. Plain rules watch around the clock, AI reads only flagged cases on $25 a month, and the sentry acts alone only on what one click undoes.",
-    image: "/work/lumo-sentry/hero.webp",
-    imageAlt: "A diagram titled How LUMO Sentry answers an attack, with the green LUMO Sentry face. Four steps from left to right. 01 Watch: plain rules read sign-ups, sign-ins and the outside text LUMO reads, around the clock, at no AI cost. 02 Decide: AI reads only what the rules flag, a second read on a short excerpt; AI spend stops at $25 a month, and at the cap the rules decide alone. 03 Act or alert: the sentry acts alone only on what one click undoes, banning a new, empty bot account, blocking a throwaway email domain, or blocking one address at sign-up; everything else is an email to staff. 04 Undo: every action can be undone, and one email says what it did and how to undo it, shown as two rows with Undo buttons. Below, a band: every Monday the red team attacks our own app with two test accounts; each probe reports Held, or Broken, which sends an urgent email.",
-    imageCaption: "How the sentry answers an attack, from the first rule to the undo. A diagram drawn for this page from Offboard’s plans, not a product screen.",
-    imageWidth: 2000, imageHeight: 1200,
-    imageFrame: "none",
-    role: "Founding Product Designer & AI Systems Lead",
-    scope: "Security strategy, the rules for what an agent may do alone, AI input safety, and the red team",
-    status: "Running, staff only",
-    result: "The first bot case is replayed every week as a drill and ends in a ban with no person in the loop. Every action has an undo.",
-    brief: {
-      problem: "Two people were the whole security team. On November 21, 2026, a script made two bot accounts, and nothing flagged it. LUMO and the connectors also read text that outsiders wrote, and nothing checked it.",
-      did: "I built a sentry with a short list of powers: plain rules watch around the clock, AI reads only flagged cases under a $25 monthly cap, outside text reaches LUMO as data, and the sentry acts alone only on what one click undoes. Every Monday it attacks our own app with test accounts.",
-      result: "Each area runs in watch mode before it may act, and a person reads a week of what it would have done. The November 21 case is replayed every week and ends in a ban with no person in the loop.",
-    },
-    featured: true,
-    plate: "offboard",
-    facts: [
-      { label: "Role", value: "Founding Product Designer & AI Systems Lead" },
-      { label: "Years", value: "2026" },
-      { label: "Team", value: "Six-person startup" },
-    ],
-    imageMarks: [],
-  },
-  {
-    /* Plan 053. Every fact is a row in plans/053-ghost-facts.md, approved by
-       Louie on 2026-11-23. Leave out usage numbers, the public cap and
-       limits, and the employer in the 2026-08-15 report: see the comment at
-       the top of content/work/lumo-ghost-check.mdx. */
-    slug: "lumo-ghost-check",
-    family: "lumo",
-    name: "LUMO Ghost Check",
-    blurb: "People skip a job, or spend an evening on it, because of this score. The first version punished normal cross-posting, hid checks that timed out, and once let its own summary contradict it. I rebuilt the scoring, made every signal run, and tied the words to the number.",
-    icon: { src: "/work/lumo-ghost-check/face.webp", width: 512, height: 512 },
-    title: "LUMO Ghost Check",
-    tags: ["Trust in AI", "Scoring design", "Product judgment"],
-    href: "/work/lumo-ghost-check",
-    summary: "Paste a job link and get a ghost-risk score, a plain verdict, the warning signs and one next step. The work was making the score deserve trust: what counts as evidence, whether each check ran, and whether the words agree with the number.",
-    image: "/work/lumo-ghost-check/hero.webp",
-    imageAlt: "A diagram titled From a job link to a score a person can act on, with the coral LUMO Ghost Check face. Four steps from left to right. 01 Paste: one job link, with no login and no email on the public page. 02 Check: 15 signals; 13 can add points and 2 are shown and add nothing; three are named, closed in the applicant system, apply link broken and frequent reposting, with 12 more. 03 Score: ghost risk from 0 to 100, where higher means more likely a ghost job; a bar shows three bands, Looks Legit from 0 to 30, Check Carefully from 31 to 60 and Likely Ghost from 61 to 100, with a line marked stop at 70; at 70 a packet build stops, and from 61 to 69 it is a warning and the person may go on. 04 Act: a plain result, with a verdict in words, the warning signs with points, and one next step. Below, a band: one engine, six places: its own page in the app, the public page, every packet build, LUMO's chat, LUMO in Slack, and the Claude and ChatGPT connectors.",
-    imageCaption: "From a pasted link to a result. A diagram drawn for this page from Offboard’s scoring code, not a product screen.",
-    imageWidth: 2000, imageHeight: 1200,
-    imageFrame: "none",
-    role: "Founding Product Designer & AI Systems Lead",
-    scope: "Scoring design, signal reliability, AI output checks, and the public checker",
-    status: "Live in Offboard and on a public page",
-    result: "All 15 signals run, one module sets the bands in every place, and a filter keeps the AI summary in line with the score.",
-    brief: {
-      problem: "People act on the ghost score, and the first version could not be trusted. A real job posted on three boards could collect 60 to 90 points. The search behind five signals timed out on 35 of the last 40 checks. One live report showed a score of 31 beside a summary that said “high chance of being a ghost job”.",
-      did: "I rebuilt the scoring so cross-posting and missing data are not evidence, cut the slow calls so every signal runs, put the band cutoffs in one module, and added a filter that rejects a summary that contradicts its band. The public checker asks for no login and no email.",
-      result: "All 15 signals ran on live checks after the fix, and the report shows the status of each one. A packet build stops at a score of 70; from 61 to 69 the person decides. Usage numbers stay private.",
     },
     featured: true,
     plate: "offboard",
@@ -287,7 +287,10 @@ export const workProjects: readonly WorkProject[] = [
 /** Every member of a project's family, the project included, in array
  *  order. Empty when the project has no family. */
 export function projectFamily(project: WorkProject): readonly WorkProject[] {
-  return project.family ? workProjects.filter((p) => p.family === project.family) : [];
+  if (!project.family) return [];
+  // The parent leads the strip; the sub-brands follow in array order.
+  const members = workProjects.filter((p) => p.family === project.family);
+  return [...members.filter((p) => p.slug === project.family), ...members.filter((p) => p.slug !== project.family)];
 }
 
 export const featuredWork = workProjects.filter((project) => project.featured);

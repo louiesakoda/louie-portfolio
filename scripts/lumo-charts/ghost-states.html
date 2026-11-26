@@ -1,0 +1,58 @@
+<!doctype html>
+<!--
+  LUMO Ghost Check: every state a person can meet (Plan 053, Socure fixes,
+  2026-11-25). Rendered to public/work/lumo-ghost-check/states.webp.
+  Sources, Offboard repository at origin/main 1e728a422: the check-in-progress
+  screenshot (seven steps); findCachedGhostAnalysis and the per-check
+  statuses in _shared/ghost/pipeline.ts and shareUtils.ts;
+  _shared/ghost/pageAvailability.ts (Sprint 567); GhostJobDetailsCard.tsx;
+  GhostCheckPublic.tsx (the LinkedIn line); plans 054 (F8), 213, 357;
+  build-job-packet/pipeline.ts (RISK_GATE_SCORE). Rows K1 to K4 in
+  plans/053-ghost-facts.md.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lumo-charts.css">
+<style>
+  :root { --brand: var(--ghost); --brand-soft: var(--ghost-soft); --brand-line: var(--ghost-line); }
+  .sheet { padding: 80px 112px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 44px; }
+  .cell { border-radius: 18px; padding: 22px 24px 24px; background: var(--raised); display: flex; flex-direction: column; gap: 12px; }
+  .cell .k { font: 500 16px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+  .cell.warn .k { color: var(--caution); }
+  .cell.brand .k { color: var(--brand); }
+  .cell h2 { margin: 0; font: 700 27px/1.15 var(--display); letter-spacing: -0.015em; }
+  .cell p { margin: 0; font: 400 20px/1.38 var(--display); color: var(--muted); }
+  .cell p b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <header class="masthead">
+    <img class="mark" src="../../public/work/lumo-ghost-check/face.webp" alt="">
+    <div>
+      <div class="eyebrow">LUMO Ghost Check · Offboard · 2026</div>
+      <h1>Every state a person can meet</h1>
+    </div>
+  </header>
+
+  <section class="grid">
+    <div class="cell"><div class="k">Working</div><h2>Seven steps, shown</h2><p>The check names its current step: <b>step 4 of 7</b>.</p></div>
+    <div class="cell"><div class="k">Seen before</div><h2>Saved result</h2><p>A link checked in the last <b>7 days</b> comes back at once.</p></div>
+    <div class="cell brand"><div class="k">Done</div><h2>Score, verdict, signs</h2><p>A band, the warning signs with points, and <b>one next step</b>.</p></div>
+    <div class="cell warn"><div class="k">Partial</div><h2>A check did not run</h2><p>Each check shows its status: <b>ran, timed out, skipped or error</b>.</p></div>
+
+    <div class="cell warn"><div class="k">No page</div><h2>The posting is gone</h2><p>A 404 or a not-found page stops the check <b>before scoring</b>. A missing page gets no verdict.</p></div>
+    <div class="cell"><div class="k">Blocked</div><h2>A site blocks reading</h2><p>A blocked page is <b>not called gone</b>. LinkedIn blocks outside reading, so the page asks for the employer’s own link.</p></div>
+    <div class="cell"><div class="k">Thin page</div><h2>Little to read</h2><p>The details card says so. Thin details are shown and <b>add no points</b>.</p></div>
+    <div class="cell warn"><div class="k">Failed</div><h2>The run crashed</h2><p>The check is <b>marked failed</b>, never left “pending”.</p></div>
+
+    <div class="cell brand"><div class="k">Words vs number</div><h2>Summary disagrees</h2><p>A summary that claims more risk or safety than the band is <b>replaced with the band’s fixed sentence</b>.</p></div>
+    <div class="cell brand"><div class="k">61 to 69</div><h2>Warning</h2><p>In a packet, the person <b>may go on</b>.</p></div>
+    <div class="cell brand"><div class="k">70 and up</div><h2>Packet stops</h2><p>The build stops <b>before the resume and the letter</b>.</p></div>
+    <div class="cell"><div class="k">Later</div><h2>The posting closes</h2><p>A tracked job shows <b>“Posting closed as of”</b> a date.</p></div>
+  </section>
+</main>
+</body>
+</html>

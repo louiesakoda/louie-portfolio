@@ -8,6 +8,8 @@ import { ARCHITECTURE_DESCRIPTION } from "@/content/work/offboard-architecture";
 
 A job search splits across separate tools: research, resume, outreach, and tracking. I designed and engineered Offboard to connect that work, from product direction to operation. This story follows Job Packets, which turn a role into research and editable application materials.
 
+**Who I worked with.** Offboard is a six-person startup. I designed and built the product with AI coding agents. Larger changes started from a written plan, a second agent reviewed the work against it, and I previewed and approved each change before it merged.
+
 </CaseStudySection>
 
 <CaseStudySection id="system" title="Give each opportunity a persistent workspace" eyebrow="Product model">
@@ -40,7 +42,7 @@ The ghost check also runs on its own, and it has its own page: [LUMO Ghost Check
 
 <CaseStudySection id="decision-control" title="Automate the preparation, keep the person as author" eyebrow="Decision 02">
 
-Outputs stay editable drafts. Nothing sends itself to an employer. With no resume, the packet comes back partial instead of inventing experience. Filing into the tracker is automatic. The line sits between organizing work inside the product and speaking for the person outside it.
+Outputs stay editable drafts. Nothing sends itself to an employer. With no resume, the packet comes back partial instead of inventing experience. A part that fails does not stop the packet: it shows amber, and the rest of the packet still opens. A step the person skipped can run later from the packet. Filing into the tracker is automatic. The line sits between organizing work inside the product and speaking for the person outside it.
 
 <SystemDiagram title="Draft, review, decide" description="Conceptual control boundary: the product prepares and files editable materials; the person reviews them and decides what to use. This is not a screenshot of a confirmation dialog.">
   <FlowDiagram stages={[

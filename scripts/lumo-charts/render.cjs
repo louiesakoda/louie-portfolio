@@ -3,6 +3,7 @@
  * Renders the LUMO sub-brand charts (Plan 052) from HTML to WebP.
  *
  *   node scripts/lumo-charts/render.cjs sentry-hero public/work/lumo-sentry/hero.webp
+ *   node scripts/lumo-charts/render.cjs flexi-charts/questions public/work/flexi/questions.webp
  *
  * Each chart is a 2000×1200 page in this folder that links lumo-charts.css.
  * Fonts load from Google Fonts, so the render needs a network connection.
@@ -21,7 +22,9 @@ if (!name || !out) {
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 2000, height: 1200 }, deviceScaleFactor: 1 });
-  await page.goto(`file://${path.join(__dirname, `${name}.html`)}`);
+  // A name with a slash is a path under scripts/, for charts outside this folder.
+  const file = name.includes("/") ? path.join(__dirname, "..", `${name}.html`) : path.join(__dirname, `${name}.html`);
+  await page.goto(`file://${file}`);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForLoadState("networkidle");
   const png = await page.screenshot({ clip: { x: 0, y: 0, width: 2000, height: 1200 } });

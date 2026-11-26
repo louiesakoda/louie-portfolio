@@ -149,14 +149,17 @@ export const LUMO_SENTRY_ANCHORS = [
 
 export const LUMO_GHOST_CHECK_ANCHORS = [
   { id: "context", label: "Context" },
+  { id: "success", label: "Success measures" },
+  { id: "research", label: "Research" },
   { id: "decision-syndication", label: "Cross-posting is not ghosting" },
   { id: "decision-signals", label: "Every signal runs" },
   { id: "decision-summary", label: "Words match the number" },
   { id: "decision-gate", label: "No gate" },
   { id: "decision-stop", label: "Warn, then stop" },
+  { id: "states", label: "Every state" },
   { id: "after", label: "After the check" },
   { id: "outcomes", label: "Outcomes" },
-  { id: "learnings", label: "Learnings" },
+  { id: "learnings", label: "Reflection" },
 ] as const satisfies readonly Anchor[];
 
 export const CASE_STUDY_ANCHORS: Record<string, readonly Anchor[]> = {
