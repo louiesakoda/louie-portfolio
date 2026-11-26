@@ -1,0 +1,54 @@
+<!doctype html>
+<!--
+  Flexi: what students asked, first question against the eighth.
+  Rendered to public/work/flexi/questions.webp by
+  node scripts/lumo-charts/render.cjs flexi-charts/questions <out>.
+  Source: CK-12's analysis of student dialogue (the link in
+  content/work/flexi.mdx, "Activity is not the same as learning"). Only the
+  two published points are drawn; nothing between them is invented.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist+Mono:wght@500&display=block");
+  :root { --paper: #f3f3f5; --ink: #1c1c21; --muted: #4a4a53; --quiet: #6b6b75; --line: #d6d6dc; --a: #1c1c21; --b: #324927; /* plate-flexi-muted, hsl(100 30% 22%) */ }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .sheet { width: 2000px; height: 1200px; padding: 96px 112px; display: flex; flex-direction: column; }
+  .eyebrow { font: 500 22px/1 "Geist Mono", monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--quiet); }
+  h1 { margin: 16px 0 0; font: 700 60px/1.05 Inter, sans-serif; letter-spacing: -0.03em; }
+  .lede { margin: 20px 0 0; max-width: 62em; font: 400 25px/1.4 Inter, sans-serif; color: var(--muted); }
+  svg { margin-top: 36px; overflow: visible; }
+  svg text { font-family: Inter, sans-serif; }
+  .foot { margin-top: auto; font: 400 21px/1.4 Inter, sans-serif; color: var(--quiet); }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <div class="eyebrow">CK-12 Flexi · Adaptive Practice · CK-12 dialogue analysis</div>
+  <h1>Students asked for answers less, and to learn more</h1>
+  <p class="lede">Share of students’ questions to Flexi, by type, at their first question and at their eighth. In Adaptive Practice Flexi offers “Give Me a Hint” and “Clarify This” and does not reveal the answer.</p>
+  <svg width="1776" height="620" viewBox="0 0 1776 620">
+    <g font-size="22" fill="#6b6b75">
+      <line x1="300" x2="1476" y1="560" y2="560" stroke="#d6d6dc" stroke-width="2"/>
+      <text x="420" y="600" text-anchor="middle" font-weight="600" fill="#1c1c21" font-size="24">1st question</text>
+      <text x="1356" y="600" text-anchor="middle" font-weight="600" fill="#1c1c21" font-size="24">8th question</text>
+    </g>
+    <!-- y: 0% at 560, 80% at 40 -> 6.5 px per point -->
+    <line x1="420" y1="92" x2="1356" y2="222" stroke="#6b6b75" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="420" cy="92" r="14" fill="#6b6b75"/><circle cx="1356" cy="222" r="14" fill="#6b6b75"/>
+    <text x="390" y="102" text-anchor="end" font-size="56" font-weight="700" fill="#1c1c21">72%</text>
+    <text x="1386" y="232" font-size="56" font-weight="700" fill="#1c1c21">52%</text>
+    <text x="888" y="112" text-anchor="middle" font-size="26" font-weight="600" fill="#1c1c21">Asking for the answer</text>
+
+    <line x1="420" y1="488" x2="1356" y2="391" stroke="#324927" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="420" cy="488" r="14" fill="#324927"/><circle cx="1356" cy="391" r="14" fill="#324927"/>
+    <text x="390" y="498" text-anchor="end" font-size="56" font-weight="700" fill="#324927">11%</text>
+    <text x="1386" y="401" font-size="56" font-weight="700" fill="#324927">26%</text>
+    <text x="888" y="500" text-anchor="middle" font-size="26" font-weight="600" fill="#324927">Asking to learn</text>
+  </svg>
+  <p class="foot">Descriptive, not causal: it does not show that the design caused a learning gain. Only the two published points are drawn.</p>
+</main>
+</body>
+</html>

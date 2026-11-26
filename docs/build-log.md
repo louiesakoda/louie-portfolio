@@ -1334,3 +1334,32 @@ Offboard's repository (`origin/main` `1e728a422`).
   credits, plus 50 for background removal). A working pick: Louie
   confirms or picks another from `plans/053-ghost-icon-drafts.png`.
 - **Ask Louie.** Seven evidence entries and three page questions.
+
+### Socure review fixes, November 25, 2026
+
+A review of the portfolio against Socure's Senior Product Designer posting
+named gaps. Louie approved the sourced fixes. New facts are rows K1 to K7
+in `plans/053-ghost-facts.md`.
+
+- **LUMO Ghost Check.** New sections: "Success measures" (the bar each fix
+  set, and where it stands), "Research" (Louie's behavior reads, filed
+  with their queries; Google Meet walkthroughs; two reads that changed the
+  checker; the usability test not done yet) and "Every state" (a grid of
+  twelve states). A "Who I worked with" line. The reviewer line now says a
+  second AI agent did the review. The menu label "Learnings" reads
+  "Reflection", to match the heading.
+- **LUMO.** The panel line said the result was "not in yet". It now says the
+  30-day read is overdue and why: the spec left its read date blank.
+- **Offboard.** A "Who I worked with" line, and what a packet does when a
+  part fails.
+- **Flexi.** A chart of the 72% to 52% and 11% to 26% shift
+  (`scripts/flexi-charts/questions.html`); `render.cjs` takes a path under
+  `scripts/` for charts outside the LUMO folder.
+- **Order.** Offboard stays first. The LUMO family now reads Ghost Check,
+  Sentry, LUMO, Bench on the homepage; the family strip puts the parent,
+  LUMO, first.
+- **Resume.** The page and the PDF follow Louie's master resume of
+  2026-11-09: new headline, summary, bullets and skills.
+- **Not done.** The band re-measure: the read-only database login cannot
+  read ghost check rows, and a read with the service key was refused by the
+  session's safety check. Usage numbers stay off the site.

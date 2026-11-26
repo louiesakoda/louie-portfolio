@@ -615,7 +615,7 @@ export const evidence: EvidenceItem[] = [
     summary:
       "LUMO is live in Offboard. Its published numbers are test results, not usage.",
     detail:
-      "On unchanged code LUMO scores 30 to 32 of its 32 release cases, at about half a cent a turn. The numbers show quality checks, not usage, revenue, or retention. Louie does not publish LUMO usage numbers. Do not claim the panel bet succeeded; its result was pending.",
+      "On unchanged code LUMO scores 30 to 32 of its 32 release cases, at about half a cent a turn. The numbers show quality checks, not usage, revenue, or retention. Louie does not publish LUMO usage numbers. Do not claim the panel bet succeeded: its 30-day read was due in late October 2026 and has not run, because the spec left the read date blank at release.",
     route: "/work/lumo",
     anchor: "outcomes",
     tags: ["outcome", "usage", "limits", "lumo"],
@@ -954,6 +954,48 @@ export const evidence: EvidenceItem[] = [
     anchor: "after",
     tags: ["monitoring", "watch", "closed posting", "tracker", "ghost check", "lumo ghost check"],
     skills: ["Product Design", "Systems Design"],
+    evidenceType: "product",
+  },
+  {
+    id: "lumo-ghost-success",
+    project: "offboard",
+    title: "The success bar for the ghost check, set before each fix",
+    summary:
+      "Each ghost check fix started with a written bar: no penalty for a normal posting, every signal runs, one band per score everywhere, and a summary that never contradicts the score.",
+    detail:
+      "Four bars were met between July and August 2026; the summary filter's rate on real summaries is not measured. The fifth bar, re-measuring the band cutoffs on real checks about two weeks after the signals were fixed, is not done yet.",
+    route: "/work/lumo-ghost-check",
+    anchor: "success",
+    tags: ["success measures", "success criteria", "targets", "ghost check", "lumo ghost check"],
+    skills: ["Product Strategy", "Product Judgment"],
+    evidenceType: "strategy",
+  },
+  {
+    id: "lumo-ghost-research",
+    project: "offboard",
+    title: "How Louie learns what people do",
+    summary:
+      "Louie reads what people did in production several times a week, in aggregate, and files each read with its query; he filed 96 such reads from August to November 2026. He also runs walkthroughs of the app over Google Meet.",
+    detail:
+      "Two reads changed the ghost check: LinkedIn job links failed when real traffic arrived from LinkedIn, so the public page asks for the employer's own link; and people who arrived through the checker ran a check and few took a second step, so the job they checked now fills the box on their first Home screen. Not done yet: a usability test of the result screen.",
+    route: "/work/lumo-ghost-check",
+    anchor: "research",
+    tags: ["research", "user research", "behavior analysis", "walkthroughs", "usability", "ghost check", "lumo ghost check"],
+    skills: ["User Research", "Product Strategy"],
+    evidenceType: "research",
+  },
+  {
+    id: "lumo-ghost-states",
+    project: "offboard",
+    title: "Every state of the ghost check",
+    summary:
+      "The ghost check designs for twelve states: working, saved, done, partial (a check did not run), posting gone, site blocked, thin page, failed run, summary disagrees, warning at 61 to 69, packet stops at 70, and posting closed later.",
+    detail:
+      "A 404 or not-found page stops the check before scoring, so a missing page gets no verdict; a blocked page is not called gone. Each check shows its status: ran, timed out, skipped or error. A crashed run is marked failed, never left pending.",
+    route: "/work/lumo-ghost-check",
+    anchor: "states",
+    tags: ["states", "edge cases", "errors", "empty states", "uncertain results", "ghost check", "lumo ghost check"],
+    skills: ["Interaction Design", "Systems Design"],
     evidenceType: "product",
   },
   {

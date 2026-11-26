@@ -313,7 +313,7 @@ test.describe("LUMO graphics", () => {
 });
 
 test.describe("the LUMO family", () => {
-  const family = ["/work/lumo", "/work/lumo-bench", "/work/lumo-sentry", "/work/lumo-ghost-check"];
+  const family = ["/work/lumo", "/work/lumo-ghost-check", "/work/lumo-sentry", "/work/lumo-bench"];
 
   for (const path of family) {
     test(`${path} links to its siblings and marks itself`, async ({ page }) => {

@@ -2,10 +2,12 @@
  * Canonical resume data (spec §29). The /resume route renders HTML from this
  * structure in addition to offering the PDF (spec §28).
  *
- * Sources: Louie's August 22 general resume, the September 19 Clever-specific
- * resume, and his explicit correction to 14+ years. Adapted for a general
- * portfolio audience; no Clever-specific job requirements are claimed.
- * The downloadable general PDF is generated from this same structure.
+ * Source: Louie's master resume of 2026-11-09
+ * (Louie_Sakoda_Master_Resume_110926.pdf), supplied 2026-11-25. Headline,
+ * summary, roles and skills follow it word for word. Education periods,
+ * the GPA note and the "additional" line come from his earlier resumes; the
+ * master does not contradict them. The downloadable PDF is generated from
+ * this same structure (scripts/render-resume.py).
  *
  * The phone number in the source document is deliberately omitted from
  * both the HTML and the general public PDF.
@@ -49,10 +51,10 @@ export type Resume = {
 };
 
 export const resume: Resume = {
-  headline: "Founding Product Designer & AI Systems Lead | Complex Workflows",
+  headline: "Senior Product Designer | AI Products, Complex Systems & Design Systems",
 
   summary:
-    "Founding Product Designer & AI Systems Lead at Offboard, with 14+ years designing digital products across education, AI, and complex workflows. At Offboard, I lead product design and AI systems, working from early concepts through production. Before that, as Lead UX Designer at CK-12, I designed student, teacher, and administrator experiences for a learning platform serving 20M+ users, led design-system work, and shaped information architecture across learning workflows. My practice combines user research, accessibility, interaction design, and technical prototyping.",
+    "Product designer with 10+ years designing complex, multi-sided products in education, AI, and workflow software. At Offboard, I design and build AI products end to end: LUMO, a career agent with tool calls, a real-time voice mode, and human checkpoints; the eval system that gates every agent change; the design systems; and the visitor-to-member journey. Before that, I spent nine years as Lead UX Designer at CK-12, designing student, teacher, and administrator experiences for a platform serving 20M+ users, including Flexi, an LLM tutor, teacher analytics, and the 2.0 design system. I prototype and ship in working code with Claude Code, Codex, and Cursor.",
 
   roles: [
     {
@@ -61,12 +63,13 @@ export const resume: Resume = {
       period: "May 2025 - Present",
       scale: "Six-person startup",
       highlights: [
-        "Led product design from concept through production for an AI-powered career-transition platform spanning job search, research, decision support, document generation, and employer-sponsored experiences.",
-        "Designed information architectures that turn fragmented user data and complex tasks into guided workflows with visible system status, checkpoints, and user control.",
-        "Built prototypes and production experiences using React, TypeScript, Tailwind, Supabase, Claude Code, and Codex, working across design and implementation.",
-        "Designed human-in-the-loop AI patterns including visible progress, editable outputs, confirmations, error recovery, and safeguards for high-stakes decisions.",
-        "Designed and shipped Lumo's real-time AI voice experience with tool calling, preserving context across multi-step workflows.",
-        "Worked across product, engineering, QA, data, content, marketing, and business stakeholders in a six-person startup to prioritize roadmap decisions and ship product iterations.",
+        "Designed and built Offboard, a job search platform, including LUMO, an AI career agent that acts across plans, jobs, applications, resume, documents, and network through tool calls, showing its steps and the sources it used.",
+        "Designed human-in-the-loop patterns for agent actions: editable drafts, approval checkpoints, restate-and-confirm before any write, error recovery, and safeguards for high-stakes money and legal decisions.",
+        "Designed and shipped LUMO's real-time voice agent (OpenAI Realtime) with a server-side tool allowlist and spoken confirmation before any write, covered by an automated golden test that checks the write in the database.",
+        "Built LUMO Bench, the eval system that gates every agent change: a 32-case release gate, a 31-case hard set with a tuning threshold, and an LLM grader validated on 25 blind human verdicts (24 agree, Cohen's kappa 0.92); it also decides model swaps.",
+        "Designed Offboard's connector for Claude and ChatGPT: one tool list for both assistants, so members can search jobs, build application packets, and update their tracker from their own AI.",
+        "Own Offboard's two design systems (app and marketing): semantic tokens, a canonical design document with decision records, and automated tests that fail the build on violations, so UI built by engineers and AI tools stays on standard.",
+        "Own the visitor-to-member journey: the marketing homepage narrative, a free no-email-gate Ghost Job Checker, search-driven company pages, pricing, and a redesigned onboarding and first-run experience.",
       ],
     },
     {
@@ -75,13 +78,12 @@ export const resume: Resume = {
       period: "May 2016 - May 2025",
       scale: "Platform serving 20M+ users",
       highlights: [
-        "Designed workflows for a K-12 learning platform serving 20M+ users worldwide, supporting student, teacher, and administrator needs across content, practice, assignments, reporting, and platform management.",
-        "Led the development and evolution of CK-12's 2.0 design system, establishing reusable interaction patterns across responsive web experiences and partnering with engineering on a parallel React component library.",
-        "Shaped information architecture and navigation across student, teacher, and administrator experiences, simplifying workflows and improving consistency across the platform.",
-        "Led research and usability testing with students and educators, translating behavioral insights into product and architectural changes.",
-        "Led UX for Flexi, CK-12's LLM-powered student tutor, designing conversational and guided experiences for multi-step math and science problems.",
-        "Partnered with product, engineering, data science, curriculum, and research teams to frame problems, explore solutions, define success criteria, and ship learning experiences.",
-        "Designed responsive experiences aligned with WCAG accessibility standards and worked with engineering to resolve accessibility issues across shared components and interaction patterns.",
+        "Designed complex workflows across a K-12 learning platform serving 20M+ users worldwide, supporting distinct student, teacher, and administrator needs across content, practice, assignments, reporting, and platform management.",
+        "Led UX for Flexi, CK-12's LLM-powered student tutor, designing multi-turn flows, clarification patterns, and guided follow-ups (simpler explanation, analogy, more detail, challenge me) that help students reason instead of just getting answers.",
+        "Designed Insights and Foresights, teacher analytics that turn student performance data into clear visualizations and next steps.",
+        "Led the development and evolution of CK-12's 2.0 design system, establishing reusable, WCAG-aligned interaction patterns and partnering with Engineering on a parallel React component library.",
+        "Shaped information architecture and navigation across student, teacher, and administrator experiences, simplifying complex workflows and creating consistency across the platform.",
+        "Led user research and usability testing with students and educators, translating behavioral insights into product and architectural changes that reduced cognitive load.",
       ],
     },
     {
@@ -90,9 +92,9 @@ export const resume: Resume = {
       period: "Nov 2021 - Nov 2022",
       scale: "80,000+ learners onboarded",
       highlights: [
-        "Designed and developed an education platform that onboarded 80,000+ learners into crypto and web3 concepts through simple, approachable learning experiences.",
-        "Created an automated email course completed by 12,000+ learners, combining curriculum design, UX writing, product strategy, and engagement analytics.",
-        "Managed a distributed team of 38 contributors to translate 400,000+ words into 10 languages, building lightweight systems to maintain quality at scale.",
+        "Designed and developed a web3 education site that onboarded 80,000+ learners into crypto and web3 concepts with simple, approachable content.",
+        "Created an automated email course (a \u201clearning playbook\u201d) completed by 12,000+ learners, combining curriculum design, UX writing, and engagement analytics.",
+        "Managed a distributed team of 38 contributors to translate 400,000+ words into 10 languages, building processes and tooling to maintain quality at scale.",
       ],
     },
     {
@@ -101,6 +103,7 @@ export const resume: Resume = {
       period: "Jun 2014 - May 2016",
       scale: "Managed 4 designers on a global redesign",
       highlights: [
+        "Collaborated with product, marketing, and engineering to design promotional experiences for Lowes.com across desktop, mobile, and email.",
         "Produced and iterated on creative assets for home, landing, and brand pages in a fast-paced, experiment-driven ecommerce environment.",
         "Managed a team of 4 designers on a Global Redesign effort to modernize the ecommerce experience and align it with updated brand and UX guidelines.",
       ],
@@ -123,67 +126,30 @@ export const resume: Resume = {
 
   skillGroups: [
     {
+      label: "Building",
+      skills: ["React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "Claude Code", "Codex", "Cursor"],
+    },
+    {
+      label: "AI Quality",
+      skills: ["Eval Design", "Release Gates", "LLM-as-Grader Validation", "Golden Tests", "Model Requalification"],
+    },
+    {
       label: "AI Product Design",
-      skills: [
-        "AI-first product design",
-        "LLM UX",
-        "Human-in-the-loop workflows",
-        "Agentic workflows",
-        "AI automations",
-        "Voice and tool calling",
-        "Decision-support UX",
-        "Model-output review flows",
-        "Prompt/workflow design",
-      ],
+      skills: ["AI Agents", "Conversational and Voice UX", "Tool Calling", "Human-in-the-Loop UX", "Agent Oversight and Steering", "MCP Connectors"],
     },
     {
       label: "Product & Systems Design",
       skills: [
-        "Internal tools",
-        "Journey mapping",
-        "Complex workflow design",
-        "Talent workflows",
-        "Knowledge systems",
-        "Information architecture",
-        "High-fidelity prototyping",
-        "Interaction design",
-        "UX writing",
-        "Usability testing",
-        "User research",
-      ],
-    },
-    {
-      label: "Design Systems & Accessibility",
-      skills: [
-        "Design systems",
-        "Component patterns",
-        "Accessibility",
-        "WCAG",
-        "Responsive web",
+        "Complex Information Architecture",
+        "Multi-Sided Platforms",
+        "Design Systems",
+        "Design Tokens",
+        "Data Visualization",
+        "Growth and Onboarding Flows",
+        "User Research",
+        "Usability Testing",
+        "WCAG Accessibility",
         "Figma",
-        "Design critique",
-        "Product quality review",
-        "Design tokens",
-      ],
-    },
-    {
-      label: "Technical Fluency",
-      skills: [
-        "Claude Code",
-        "Codex",
-        "Cursor",
-        "React",
-        "TypeScript",
-        "JavaScript",
-        "Vite",
-        "Tailwind CSS",
-        "shadcn/ui",
-        "Supabase",
-        "Postgres/RLS",
-        "Deno edge functions",
-        "API integrations",
-        "Stripe",
-        "Resend",
       ],
     },
   ],

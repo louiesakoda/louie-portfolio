@@ -26,13 +26,40 @@ One engine runs every check, so a fix lands in each place at once. It runs in si
 
 The score is the sum of 15 signals. Thirteen can add points, each up to a set maximum. Two, a missing posting date and thin job details, are shown for information and add nothing.
 
-People act on this number. They skip a job, or they spend an evening on it. So the design problem is trust. The score must not punish a normal posting, must not hide a check that did not run, and must not be contradicted by its own summary. I made those calls and built the checker with AI coding agents in the loop.
+People act on this number. They skip a job, or they spend an evening on it. So the design problem is trust. The score must not punish a normal posting, must not hide a check that did not run, and must not be contradicted by its own summary.
+
+**Who I worked with.** I made the design calls and built the checker with AI coding agents. A second agent reviewed each change against its written plan, and I previewed and approved each one before it merged.
 
 <ArtifactFrame src="/work/lumo-ghost-check/checking.webp" alt="Offboard's Check a job posting page. The intro reads: Paste a public job URL to check stale listings, broken apply flows, duplicate job IDs, and other warning signs. A card shows a ghost icon and Searching for employer reviews, step 4 of 7, with a progress bar." width={1500} height={610} caption="A check in progress: paste a job link, and it works through seven steps. A QA account, October 2026. Product screenshot." />
 
 <ArtifactFrame src="/work/lumo-ghost-check/result.webp" alt="A finished ghost check for a Head of AI Design posting at Baker Tilly. The score is 0, labelled Looks Legit. The verdict reads: This posting shows few warning signs. Safe to apply. A What To Do Next card offers Add to Application Tracker. Below, a card reads No material warning signals were detected from this posting, and a Context card shows the posting snapshot: title, company, location, date posted, ATS, and source." width={1500} height={900} caption="A finished check. The result gives a score, a plain verdict, the signals found, and one next step. A QA account, October 2026. Product screenshot." />
 
 {/* TODO(asset): product screenshots from a QA account: the public page, a shared report, and a mid-band result ("Check Carefully") with its warning signs. No real member's check. */}
+
+</CaseStudySection>
+
+<CaseStudySection id="success" title="The bar, written down before each fix" eyebrow="Success measures">
+
+Each fix started with a plan that said what "fixed" would mean. The bars, and where each one stands:
+
+- **A normal posting is not punished.** Cross-posting and missing data add no points, and a result is called high confidence only when a signal with evidence fired. Met in July 2026.
+- **Every advertised signal runs.** All 15 run on a live check, and the report shows each check's status. Met in August 2026.
+- **One score, one band, everywhere.** The app, the share page, the social image and the email read the same score as the same band. Met in August 2026.
+- **The words never contradict the number.** A summary that claims more risk or more safety than its band is replaced. Met; how often it fires on real summaries is not measured.
+- **The band cutoffs are re-measured on real checks** about two weeks after the signals were fixed. Not done yet.
+
+</CaseStudySection>
+
+<CaseStudySection id="research" title="How I learn what people do" eyebrow="Research">
+
+Most of what I learn comes from behavior. Several times a week I read what people did in production, in aggregate, and file each read with the query that produced it, so the next read can repeat it. From August to November 2026 I filed 96 of these reads. I also run walkthroughs of the app with people over Google Meet, for the feedback that behavior cannot show.
+
+Two of those reads changed the ghost check:
+
+- **Real traffic found a gap.** LinkedIn job links failed when the checker first met real traffic from LinkedIn, because the scraping service cannot render that site. It was fixed the same week, and the public page now asks for the employer's own link.
+- **People checked a job, then stopped.** A read of the people who arrived through the checker showed most ran a check and few took a second step. So a job a person checked before signing up now fills the box on their first Home screen, ready to build a packet.
+
+Not done yet: a usability test of the result screen itself, to learn whether people read the 0 to 100 score, the bands and "this check did not run" the way they are meant.
 
 </CaseStudySection>
 
@@ -130,6 +157,14 @@ The score has three bands: 0 to 30 "Looks Legit", 31 to 60 "Check Carefully", 61
 
 </CaseStudySection>
 
+<CaseStudySection id="states" title="Every state a person can meet" eyebrow="States">
+
+A result screen that only designs the happy path hides the cases where trust is lost. These are the states a person can meet, from the first step to a week later.
+
+<ArtifactFrame frame="none" src="/work/lumo-ghost-check/states.webp" width={2000} height={1200} alt="A grid titled Every state a person can meet, LUMO Ghost Check, twelve cells. Working: seven steps, shown; the check names its current step, step 4 of 7. Seen before: saved result; a link checked in the last 7 days comes back at once. Done: score, verdict, signs; a band, the warning signs with points, and one next step. Partial: a check did not run; each check shows its status, ran, timed out, skipped or error. No page: the posting is gone; a 404 or a not-found page stops the check before scoring, and a missing page gets no verdict. Blocked: a site blocks reading; a blocked page is not called gone, and because LinkedIn blocks outside reading, the page asks for the employer's own link. Thin page: little to read; the details card says so, and thin details are shown and add no points. Failed: the run crashed; the check is marked failed, never left pending. Words versus number: summary disagrees; a summary that claims more risk or safety than the band is replaced with the band's fixed sentence. 61 to 69: warning; in a packet, the person may go on. 70 and up: packet stops; the build stops before the resume and the letter. Later: the posting closes; a tracked job shows Posting closed as of a date." caption="Every state, from the first step to a posting that closes later. A diagram drawn for this page from Offboard’s code and plans, not a product screen." />
+
+</CaseStudySection>
+
 <CaseStudySection id="after" title="After the check" eyebrow="What came next">
 
 A score is a reading on one day. A posting can close a week later.
@@ -143,7 +178,7 @@ A score is a reading on one day. A posting can close a week later.
 
 The ghost check is live in the six places above. Usage numbers stay private. The numbers below are test and system results.
 
-- **Cost per check.** On August 26, 2026 new cost logging showed that a public check billed about 10 to 17 scraping credits, not the 1 to 2 I had assumed. Two causes: the scraper's own AI extraction duplicated a step the pipeline already ran, and a browser agent fired on 13 of 20 public runs. The fix shipped the next day. The reviewer found a defect the plan had missed and sent the work back twice before it merged.
+- **Cost per check.** On August 26, 2026 new cost logging showed that a public check billed about 10 to 17 scraping credits, not the 1 to 2 I had assumed. Two causes: the scraper's own AI extraction duplicated a step the pipeline already ran, and a browser agent fired on 13 of 20 public runs. The fix shipped the next day. In review, a second AI agent found a defect the plan had missed and sent the work back twice before it merged.
 - **A model swap, checked first.** In October 2026 I checked a newer small model on the ghost pipeline before switching: 3 live postings, 5 stages, each recorded once and replayed twice. It passed only after a one-sentence prompt fix, for the stage that reads employer reviews. With the fix, 18 of 18 flags were false on real requests, and 18 of 18 were true on the same requests with a dated layoff and three recent ghosting reviews added. A first wording dropped 2 of 3 true signals and was rejected.
 - **Tests.** The engine has 104 tests in 12 files.
 - **Real traffic found a gap.** LinkedIn job links failed when the checker first met real traffic from LinkedIn, because the scraping service cannot render that site. It was fixed the same week.

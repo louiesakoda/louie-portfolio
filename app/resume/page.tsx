@@ -14,7 +14,7 @@ import { resume } from "@/content/resume";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `${profile.name} — ${resume.headline}. 14+ years designing digital products, including learning, workflow, and decision-support experiences.`,
+  description: `${profile.name} — ${resume.headline}. 10+ years designing complex, multi-sided products in education, AI, and workflow software.`,
   alternates: { canonical: "/resume" },
 };
 
